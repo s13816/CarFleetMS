@@ -1,0 +1,221 @@
+﻿@model CarFleetMS.Data.ViewModel.AddVehicleViewModel
+
+@{
+    ViewData["Title"] = "AddVehicle";
+}
+
+<h2>AddVehicle</h2>
+
+<h4>Vehicle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddVehicle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.RegistrationNumber" class="control-label">A - Numer rejestracyjny</label>
+                <input asp-for="@Model.Vehicle.RegistrationNumber" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.RegistrationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.DateOfFirstRegistration" class="control-label">B - Data pierwszej rejestracji</label>
+                <input type="date" asp-format="{0:yyyy-MM-dd}" asp-for="@Model.Vehicle.DateOfFirstRegistration" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.DateOfFirstRegistration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.OwnerId" class="control-label">C.1 - Nazwisko lub nazwa posiadacza dowodu rejestracyjnego</label>
+                <select asp-for="@Model.Vehicle.OwnerId" class="form-control" asp-items="@Model.People"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.HolderId" class="control-label">C.2 - Nazwisko lub nazwa właściciela pojazdu</label>
+                <select asp-for="@Model.Vehicle.HolderId" class="form-control" asp-items="@Model.People"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.Model.BrandId" class="control-label">D.1 - Marka pojazdu</label>
+                <select id="comboboxBrand" asp-for="@Model.Vehicle.Model.BrandId" class="form-control" asp-items='@Model.Brands'>
+                    <option value="-1">Wybierz marke</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.VehicleTypeId" class="control-label">D.2 - Typ pojazdu</label>
+                <select asp-for="@Model.Vehicle.VehicleTypeId" class="form-control" asp-items="@Model.VehicleTypes"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.ModelId" class="control-label">D.3 - Model pojazdu</label>
+                <select id="comboboxModel" asp-for="@Model.Vehicle.ModelId" class="form-control" asp-items='@Model.Models'>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.Vin" class="control-label">E - numer identyfikacyjny(VIN)</label>
+                <input asp-for="@Model.Vehicle.Vin" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.Vin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.MaxVehicleMass" class="control-label">F.1 - Maksymalna masa całkowita</label>
+                <input asp-for="@Model.Vehicle.MaxVehicleMass" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.MaxVehicleMass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.PermissibleGrossVehicleWeight" class="control-label">F.2 - Dopuszczalna masa całkowita pojazdu</label>
+                <input asp-for="@Model.Vehicle.PermissibleGrossVehicleWeight" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.PermissibleGrossVehicleWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.PermissibleTotalWeightOfTheVehicleCombination" class="control-label">F.3 - Dopuszczalna masa całkowita zespołu pojazdów</label>
+                <input asp-for="@Model.Vehicle.PermissibleTotalWeightOfTheVehicleCombination" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.PermissibleTotalWeightOfTheVehicleCombination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.VehicleMass" class="control-label">G - Masa własna pojazdu</label>
+                <input asp-for="@Model.Vehicle.VehicleMass" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.VehicleMass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.RegistrationEndDate" class="control-label">H - okres ważności dowodu</label>
+                <input type="date" asp-format="{0:yyyy-MM-dd}" asp-for="@Model.Vehicle.RegistrationEndDate" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.RegistrationEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.RegistrationReleaseDate" class="control-label">I - Data wydania dowodu</label>
+                <input type="date" asp-format="{0:yyyy-MM-dd}" asp-for="@Model.Vehicle.RegistrationReleaseDate" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.RegistrationReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.VehicleCategoryId" class="control-label">J - Kategoria pojazdu</label>
+                <select asp-for="@Model.Vehicle.VehicleCategoryId" class="form-control" asp-items="@Model.VehicleCategories"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.VehicleTypeApprovalCertificateNumber" class="control-label">K - numer świadectwa homologacji typu pojazdu</label>
+                <input asp-for="@Model.Vehicle.VehicleTypeApprovalCertificateNumber" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.VehicleTypeApprovalCertificateNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.AxlesNumber" class="control-label">L - Liczba osi</label>
+                <input asp-for="@Model.Vehicle.AxlesNumber" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.AxlesNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.MaxTrailerWeightWithBrake" class="control-label">O.1 - Maksymalna masa całkowita przyczepy z hamulcem</label>
+                <input asp-for="@Model.Vehicle.MaxTrailerWeightWithBrake" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.MaxTrailerWeightWithBrake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.MaxTrailerWeightWithoutBrake" class="control-label">O.2 - Maksymalna masa całkowita przyczepy bez hamulca</label>
+                <input asp-for="@Model.Vehicle.MaxTrailerWeightWithoutBrake" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.MaxTrailerWeightWithoutBrake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.EngineCapacity" class="control-label">P.1 - Pojemność silnika</label>
+                <input asp-for="@Model.Vehicle.EngineCapacity" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.EngineCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.MaxNetPowerOfTheEngine" class="control-label">P.2 - Maksymalna moc netto silnika</label>
+                <input asp-for="@Model.Vehicle.MaxNetPowerOfTheEngine" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.MaxNetPowerOfTheEngine" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="@Model.Vehicle.FuelType" class="control-label">P.3 - Rodzaj paliwa</label>
+            <input asp-for="@Model.Vehicle.FuelType" class="form-control" />
+            <span asp-validation-for="@Model.Vehicle.FuelType" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.PowerToWeightRatio" class="control-label">Q - Stosunek mocy do masy własnej</label>
+                <input asp-for="@Model.Vehicle.PowerToWeightRatio" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.PowerToWeightRatio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.SeatsNumber" class="control-label">S.1 - Liczba miejsc siedzących</label>
+                <input asp-for="@Model.Vehicle.SeatsNumber" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.SeatsNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.StandingPositionsNumber" class="control-label">S.2 - Liczba miejsc stojących</label>
+                <input asp-for="@Model.Vehicle.StandingPositionsNumber" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.StandingPositionsNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="@Model.Vehicle.Purpose" class="control-label">Przeznaczenie pojazdu</label>
+            <input asp-for="@Model.Vehicle.Purpose" class="form-control" />
+            <span asp-validation-for="@Model.Vehicle.Purpose" class="text-danger"></span>
+        </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.YearOfProduction" class="control-label">Rok produkcji pojazdu</label>
+                <input asp-for="@Model.Vehicle.YearOfProduction" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.YearOfProduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.MaxCapacity" class="control-label">Dopuszczalna ładowność</label>
+                <input asp-for="@Model.Vehicle.MaxCapacity" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.MaxCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.MaxAxleLoad" class="control-label">Największy dopuszczalny nacisk osi</label>
+                <input asp-for="@Model.Vehicle.MaxAxleLoad" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.MaxAxleLoad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.CardNumber" class="control-label">Nr karty pojazdów</label>
+                <input asp-for="@Model.Vehicle.CardNumber" class="form-control" />
+                <span asp-validation-for="@Model.Vehicle.CardNumber" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="@Model.Vehicle.Type" class="control-label">Typ pojazdu</label>
+            <input asp-for="@Model.Vehicle.Type" class="form-control" />
+            <span asp-validation-for="@Model.Vehicle.Type" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.FuelTypeId" class="control-label">Rodzaj paliwa</label>
+                <select asp-for="@Model.Vehicle.FuelTypeId" class="form-control" asp-items="@Model.FuelTypes">Wybierz rodzaj paliwa</select>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Vehicle.VehicleKindId" class="control-label">Rodzaj pojazdu</label>
+                <select asp-for="@Model.Vehicle.VehicleKindId" class="form-control" asp-items="@Model.VehicleKinds">Wybierz rodzaj pojazdu</select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#comboboxBrand').on('change', function () {
+            $('#comboboxModel option').remove();
+            var BrandId = $('#comboboxBrand option:selected').val();
+            //alert(BrandId);
+            if (BrandId != -1) { 
+                $.ajax({
+                    type: 'GET',
+                    //url: "/Vehicle/FindModels" + BrandId,
+                    url: '@Url.Action("FindModels", "Vehicles")/' + BrandId,
+                    success: function (result) {
+                        var s = '<option value ="-1">Wybierz model</option>';
+                        for (var i = 0; i < result.length; i++) {
+                            s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+                        }
+                        $('#comboboxModel').html(s);
+                    },
+                    error: function () {
+                    alert('Cannot retrieve the data');              
+                }
+                });
+            }
+        });
+    });
+</script>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

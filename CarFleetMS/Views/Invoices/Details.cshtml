@@ -1,0 +1,30 @@
+﻿@model CarFleetMS.Models.Invoice
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invoice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.RegistrationNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.FuelInvoiceId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

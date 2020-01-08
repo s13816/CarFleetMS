@@ -1,0 +1,198 @@
+﻿@model CarFleetMS.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfFirstRegistration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfFirstRegistration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxVehicleMass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxVehicleMass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PermissibleGrossVehicleWeight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PermissibleGrossVehicleWeight)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PermissibleTotalWeightOfTheVehicleCombination)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PermissibleTotalWeightOfTheVehicleCombination)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleMass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleMass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationEndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationEndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationReleaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationReleaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleTypeApprovalCertificateNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleTypeApprovalCertificateNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AxlesNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AxlesNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxTrailerWeightWithBrake)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxTrailerWeightWithBrake)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxTrailerWeightWithoutBrake)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxTrailerWeightWithoutBrake)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EngineCapacity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EngineCapacity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxNetPowerOfTheEngine)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxNetPowerOfTheEngine)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerToWeightRatio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerToWeightRatio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatsNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SeatsNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StandingPositionsNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StandingPositionsNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Purpose)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.YearOfProduction)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.YearOfProduction)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxCapacity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxCapacity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxAxleLoad)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxAxleLoad)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleKind)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleKind.VehicleKindId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FuelType.FuelTypeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Holder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Holder.PersonId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Owner.PersonId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleCategory.VehicleCategoryId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType.VehicleTypeId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VehicleId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

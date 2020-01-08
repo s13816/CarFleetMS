@@ -1,0 +1,30 @@
+﻿@model CarFleetMS.Models.VehicleType
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VehicleType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Variant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Variant)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VehicleTypeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,179 @@
+﻿@model CarFleetMS.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Vehicle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VehicleId" />
+            <div class="form-group">
+                <label asp-for="RegistrationNumber" class="control-label"></label>
+                <input asp-for="RegistrationNumber" class="form-control" />
+                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfFirstRegistration" class="control-label"></label>
+                <input asp-for="DateOfFirstRegistration" class="form-control" />
+                <span asp-validation-for="DateOfFirstRegistration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vin" class="control-label"></label>
+                <input asp-for="Vin" class="form-control" />
+                <span asp-validation-for="Vin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxVehicleMass" class="control-label"></label>
+                <input asp-for="MaxVehicleMass" class="form-control" />
+                <span asp-validation-for="MaxVehicleMass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermissibleGrossVehicleWeight" class="control-label"></label>
+                <input asp-for="PermissibleGrossVehicleWeight" class="form-control" />
+                <span asp-validation-for="PermissibleGrossVehicleWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermissibleTotalWeightOfTheVehicleCombination" class="control-label"></label>
+                <input asp-for="PermissibleTotalWeightOfTheVehicleCombination" class="form-control" />
+                <span asp-validation-for="PermissibleTotalWeightOfTheVehicleCombination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleMass" class="control-label"></label>
+                <input asp-for="VehicleMass" class="form-control" />
+                <span asp-validation-for="VehicleMass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationEndDate" class="control-label"></label>
+                <input asp-for="RegistrationEndDate" class="form-control" />
+                <span asp-validation-for="RegistrationEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationReleaseDate" class="control-label"></label>
+                <input asp-for="RegistrationReleaseDate" class="form-control" />
+                <span asp-validation-for="RegistrationReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleTypeApprovalCertificateNumber" class="control-label"></label>
+                <input asp-for="VehicleTypeApprovalCertificateNumber" class="form-control" />
+                <span asp-validation-for="VehicleTypeApprovalCertificateNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AxlesNumber" class="control-label"></label>
+                <input asp-for="AxlesNumber" class="form-control" />
+                <span asp-validation-for="AxlesNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxTrailerWeightWithBrake" class="control-label"></label>
+                <input asp-for="MaxTrailerWeightWithBrake" class="form-control" />
+                <span asp-validation-for="MaxTrailerWeightWithBrake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxTrailerWeightWithoutBrake" class="control-label"></label>
+                <input asp-for="MaxTrailerWeightWithoutBrake" class="form-control" />
+                <span asp-validation-for="MaxTrailerWeightWithoutBrake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineCapacity" class="control-label"></label>
+                <input asp-for="EngineCapacity" class="form-control" />
+                <span asp-validation-for="EngineCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxNetPowerOfTheEngine" class="control-label"></label>
+                <input asp-for="MaxNetPowerOfTheEngine" class="form-control" />
+                <span asp-validation-for="MaxNetPowerOfTheEngine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerToWeightRatio" class="control-label"></label>
+                <input asp-for="PowerToWeightRatio" class="form-control" />
+                <span asp-validation-for="PowerToWeightRatio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatsNumber" class="control-label"></label>
+                <input asp-for="SeatsNumber" class="form-control" />
+                <span asp-validation-for="SeatsNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StandingPositionsNumber" class="control-label"></label>
+                <input asp-for="StandingPositionsNumber" class="form-control" />
+                <span asp-validation-for="StandingPositionsNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Purpose" class="control-label"></label>
+                <input asp-for="Purpose" class="form-control" />
+                <span asp-validation-for="Purpose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearOfProduction" class="control-label"></label>
+                <input asp-for="YearOfProduction" class="form-control" />
+                <span asp-validation-for="YearOfProduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxCapacity" class="control-label"></label>
+                <input asp-for="MaxCapacity" class="form-control" />
+                <span asp-validation-for="MaxCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxAxleLoad" class="control-label"></label>
+                <input asp-for="MaxAxleLoad" class="form-control" />
+                <span asp-validation-for="MaxAxleLoad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardNumber" class="control-label"></label>
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerId" class="control-label"></label>
+                <select asp-for="OwnerId" class="form-control" asp-items="ViewBag.OwnerId"></select>
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HolderId" class="control-label"></label>
+                <select asp-for="HolderId" class="form-control" asp-items="ViewBag.HolderId"></select>
+                <span asp-validation-for="HolderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelId" class="control-label"></label>
+                <select asp-for="ModelId" class="form-control" asp-items="ViewBag.ModelId"></select>
+                <span asp-validation-for="ModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleTypeId" class="control-label"></label>
+                <select asp-for="VehicleTypeId" class="form-control" asp-items="ViewBag.VehicleTypeId"></select>
+                <span asp-validation-for="VehicleTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleCategoryId" class="control-label"></label>
+                <select asp-for="VehicleCategoryId" class="form-control" asp-items="ViewBag.VehicleCategoryId"></select>
+                <span asp-validation-for="VehicleCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelTypeId" class="control-label"></label>
+                <select asp-for="FuelTypeId" class="form-control" asp-items="ViewBag.FuelTypeId"></select>
+                <span asp-validation-for="FuelTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleKindId" class="control-label"></label>
+                <select asp-for="VehicleKindId" class="form-control" asp-items="ViewBag.VehicleKindId"></select>
+                <span asp-validation-for="VehicleKindId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
