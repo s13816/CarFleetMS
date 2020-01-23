@@ -13,22 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Street)
+                Ulica
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BuildingNumber)
+                Numer
+            </th>            
+            <th>
+                Kod pocztowy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApartmentNumber)
+                Miasto
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
+                Kraj
             </th>
             <th></th>
         </tr>
@@ -39,12 +36,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Street)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuildingNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApartmentNumber)
-            </td>
+            @if (item.ApartmentNumber != null)
+            {
+            <td>@Html.DisplayFor(modelItem => item.BuildingNumber) / @Html.DisplayFor(modelItem => item.ApartmentNumber)</td>
+            } else {
+            <td>@Html.DisplayFor(modelItem => item.BuildingNumber)</td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.PostalCode)
             </td>

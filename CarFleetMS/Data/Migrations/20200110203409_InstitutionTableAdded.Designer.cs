@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarFleetMS.Data.Migrations
 {
     [DbContext(typeof(CarFleetMSContext))]
-    [Migration("20200106160614_purposeColumnDeleted")]
-    partial class PurposeColumnDeleted
+    [Migration("20200110203409_InstitutionTableAdded")]
+    partial class InstitutionTableAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,11 +35,15 @@ namespace CarFleetMS.Data.Migrations
 
                     b.Property<string>("Country");
 
+                    b.Property<int?>("InstitutionId");
+
                     b.Property<string>("PostalCode");
 
                     b.Property<string>("Street");
 
                     b.HasKey("AddressId");
+
+                    b.HasIndex("InstitutionId");
 
                     b.ToTable("Address");
                 });
@@ -121,6 +125,23 @@ namespace CarFleetMS.Data.Migrations
                     b.HasKey("FuelTypeId");
 
                     b.ToTable("FuelType");
+                });
+
+            modelBuilder.Entity("CarFleetMS.Models.Institution", b =>
+                {
+                    b.Property<int>("InstitutionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AddressId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("InstitutionId");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("Institution");
                 });
 
             modelBuilder.Entity("CarFleetMS.Models.Invoice", b =>
@@ -279,6 +300,8 @@ namespace CarFleetMS.Data.Migrations
 
                     b.Property<int>("PowerToWeightRatio");
 
+                    b.Property<string>("Purpose");
+
                     b.Property<DateTime>("RegistrationEndDate")
                         .HasColumnType("date");
 
@@ -294,6 +317,8 @@ namespace CarFleetMS.Data.Migrations
                     b.Property<int?>("StandingPositionsNumber");
 
                     b.Property<int>("VehicleCategoryId");
+
+                    b.Property<int>("VehicleKindId");
 
                     b.Property<int>("VehicleMass");
 
@@ -320,6 +345,8 @@ namespace CarFleetMS.Data.Migrations
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("VehicleCategoryId");
+
+                    b.HasIndex("VehicleKindId");
 
                     b.HasIndex("VehicleTypeId");
 
@@ -378,6 +405,19 @@ namespace CarFleetMS.Data.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Vehicle_Driver");
+                });
+
+            modelBuilder.Entity("CarFleetMS.Models.VehicleKind", b =>
+                {
+                    b.Property<int>("VehicleKindId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("VehicleKindId");
+
+                    b.ToTable("VehicleKind");
                 });
 
             modelBuilder.Entity("CarFleetMS.Models.VehicleType", b =>
@@ -560,6 +600,13 @@ namespace CarFleetMS.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CarFleetMS.Models.Address", b =>
+                {
+                    b.HasOne("CarFleetMS.Models.Institution", "Institution")
+                        .WithMany()
+                        .HasForeignKey("InstitutionId");
+                });
+
             modelBuilder.Entity("CarFleetMS.Models.Driver", b =>
                 {
                     b.HasOne("CarFleetMS.Models.PersonCompany", "PersonCompany")
@@ -579,6 +626,14 @@ namespace CarFleetMS.Data.Migrations
                         .WithMany("Ensurance")
                         .HasForeignKey("VehicleId")
                         .HasConstraintName("VehicleEnsurance_Vehicle");
+                });
+
+            modelBuilder.Entity("CarFleetMS.Models.Institution", b =>
+                {
+                    b.HasOne("CarFleetMS.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CarFleetMS.Models.Invoice", b =>
@@ -647,6 +702,11 @@ namespace CarFleetMS.Data.Migrations
                         .WithMany("Vehicle")
                         .HasForeignKey("VehicleCategoryId")
                         .HasConstraintName("Vehicle_VehicleCategory");
+
+                    b.HasOne("CarFleetMS.Models.VehicleKind", "VehicleKind")
+                        .WithMany("Vehicle")
+                        .HasForeignKey("VehicleKindId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CarFleetMS.Models.VehicleType", "VehicleType")
                         .WithMany("Vehicle")

@@ -1,17 +1,18 @@
 ﻿@model CarFleetMS.Data.ViewModel.AddVehicleViewModel
 
 @{
-    ViewData["Title"] = "AddVehicle";
+    ViewData["Title"] = "EditVehicle";
 }
 
-<h2>AddVehicle</h2>
+<h2>EditVehicle</h2>
 
 <h4>Vehicle</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddVehicle">
+        <form asp-action="EditVehicle">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Vehicle.VehicleId" />
             <div class="form-group">
                 <label asp-for="@Model.Vehicle.RegistrationNumber" class="control-label">A - Numer rejestracyjny</label>
                 <input asp-for="@Model.Vehicle.RegistrationNumber" class="form-control" />
@@ -44,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Vehicle.ModelId" class="control-label">D.3 - Model pojazdu</label>
-                <select id="comboboxModel" asp-for="@Model.Vehicle.ModelId" class="form-control">
+                <select id="comboboxModel" asp-for="@Model.Vehicle.ModelId" class="form-control" asp-items="@Model.Models">
                 </select>
 
             </div>
@@ -166,7 +167,7 @@
                 <select asp-for="@Model.Vehicle.VehicleKindId" class="form-control" asp-items="@Model.VehicleKinds">Wybierz rodzaj pojazdu</select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
@@ -176,7 +177,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -184,9 +184,11 @@
         $('#comboboxBrand').on('change', function () {
             $('#comboboxModel option').remove();
             var BrandId = $('#comboboxBrand option:selected').val();
+            //alert(BrandId);
             if (BrandId != -1) {
                 $.ajax({
                     type: 'GET',
+                    //url: "/Vehicle/FindModels" + BrandId,
                     url: '@Url.Action("FindModels", "Vehicles")/' + BrandId,
                     success: function (result) {
                         var s = '<option value ="-1">Wybierz model</option>';
@@ -203,8 +205,6 @@
         });
     });
 </script>
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

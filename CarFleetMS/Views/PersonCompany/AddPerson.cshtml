@@ -1,0 +1,79 @@
+﻿@model CarFleetMS.Data.ViewModel.AddPersonViewModel
+
+@{
+    ViewData["Title"] = "AddPerson";
+}
+
+<h2>AddPerson</h2>
+
+<h4>PersonCompany</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddPerson">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.People.Name" class="control-label"></label>
+                <input asp-for="@Model.People.Name" class="form-control" />
+                <span asp-validation-for="@Model.People.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.SecondName" class="control-label"></label>
+                <input asp-for="@Model.People.SecondName" class="form-control" />
+                <span asp-validation-for="@Model.People.SecondName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.Surname" class="control-label"></label>
+                <input asp-for="@Model.People.Surname" class="form-control" />
+                <span asp-validation-for="@Model.People.Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.Pesel" class="control-label"></label>
+                <input asp-for="@Model.People.Pesel" class="form-control" />
+                <span asp-validation-for="@Model.People.Pesel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.CompanyName" class="control-label"></label>
+                <input asp-for="@Model.People.CompanyName" class="form-control" />
+                <span asp-validation-for="@Model.People.CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.NIP" class="control-label"></label>
+                <input asp-for="@Model.People.NIP" class="form-control" />
+                <span asp-validation-for="@Model.People.NIP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.PhoneNumber" class="control-label"></label>
+                <input asp-for="@Model.People.PhoneNumber" class="form-control" />
+                <span asp-validation-for="@Model.People.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.Email" class="control-label"></label>
+                <input asp-for="@Model.People.Email" class="form-control" />
+                <span asp-validation-for="@Model.People.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="@Model.People.IsPerson" /> @Html.DisplayNameFor(model => model.People.IsPerson)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.People.AddressId" class="control-label"></label>
+                <select asp-for="@Model.People.AddressId" class ="form-control" asp-items="@Model.Addresses"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

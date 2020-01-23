@@ -30,31 +30,33 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="PersonCompany" asp-action="Index">Person</a></li>
-                    <li><a asp-area="" asp-controller="Address" asp-action="Index">Address</a></li>
-                    <li><a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicle</a></li>
-                    
-                    
-                        
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Database<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a asp-area="" asp-controller="Brand" asp-action="Index">Marki</a></li>
-                                <li><a asp-area="" asp-controller="Drivers" asp-action="Index">Kierowcy</a></li>
-                                <li><a asp-area="" asp-controller="Ensurances" asp-action="Index">Ubezpieczenia</a></li>
-                                <li><a asp-area="" asp-controller="FuelTypes" asp-action="Index">Typy paliwa</a></li>
-                                <li><a asp-area="" asp-controller="Models" asp-action="Index">Modele</a></li>
-                                <li><a asp-area="" asp-controller="Repairs" asp-action="Index">Naprawy</a></li>
-                                <li><a asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a></li>
-                                <li><a asp-area="" asp-controller="VehicleAnnotations" asp-action="Index">Notatki</a></li>
-                                <li><a asp-area="" asp-controller="VehicleCategories" asp-action="Index">Kategorie pojazdów</a></li>
-                                <li><a asp-area="" asp-controller="VehicleDrivers" asp-action="Index">Kierowcy pojazdów</a></li>
-                                <li><a asp-area="" asp-controller="VehicleTypes" asp-action="Index">Typy pojazdów</a></li>
-                                <li><a asp-area="" asp-controller="VehicleKinds" asp-action="Index">Rodzaje pojazdów</a></li>
-                            </ul>
-                        </li>
-                   
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
+                    <li><a asp-area="" asp-controller="Vehicles" asp-action="Index">Pojazdy</a></li>
+                    <li><a asp-area="" asp-controller="VehicleDrivers" asp-action="Index">Kierowcy</a></li>
+                    <li><a asp-area="" asp-controller="Ensurances" asp-action="Index">Ubezpieczenia</a></li>
+                    <li><a asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Database<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="PersonCompany" asp-action="Index">Osoby</a></li>
+                            <li><a asp-area="" asp-controller="Address" asp-action="Index">Adresy</a></li>
+                            <li><a asp-area="" asp-controller="Brand" asp-action="Index">Marki</a></li>
+                            <li><a asp-area="" asp-controller="Drivers" asp-action="Index">Kierowcy</a></li>
+
+                            <li><a asp-area="" asp-controller="FuelTypes" asp-action="Index">Typy paliwa</a></li>
+                            <li><a asp-area="" asp-controller="Models" asp-action="Index">Modele</a></li>
+                            <li><a asp-area="" asp-controller="Repairs" asp-action="Index">Naprawy</a></li>
+                            <li><a asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a></li>
+                            <li><a asp-area="" asp-controller="VehicleAnnotations" asp-action="Index">Notatki</a></li>
+                            <li><a asp-area="" asp-controller="VehicleCategories" asp-action="Index">Kategorie pojazdów</a></li>
+
+                            <li><a asp-area="" asp-controller="VehicleTypes" asp-action="Index">Typy pojazdów</a></li>
+                            <li><a asp-area="" asp-controller="VehicleKinds" asp-action="Index">Rodzaje pojazdów</a></li>
+                            <li><a asp-area="" asp-controller="Institutions" asp-action="Index">Organy wydające</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

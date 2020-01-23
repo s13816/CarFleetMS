@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarFleetMS.Models;
+using CarFleetMS.Data.ViewModel;
 
 namespace CarFleetMS.Controllers
 {
@@ -154,6 +155,161 @@ namespace CarFleetMS.Controllers
         private bool PersonCompanyExists(int id)
         {
             return _context.PersonCompany.Any(e => e.PersonId == id);
+        }
+
+        public IActionResult AddPerson()
+        {
+            return View(Model());
+        }
+
+        [HttpPost]
+        public IActionResult AddPerson([Bind("PersonId,Name,SecondName,Surname,Pesel,CompanyName,NIP,PhoneNumber,Email,IsPerson,AddressId")] PersonCompany personCompany)
+        {
+            _context.Add(personCompany);
+            _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+
+        // GET: Names/Edit/5
+        //The GET method takes the id from the URL and passes it into the query to 
+
+        //return data for the specific record
+        public ActionResult EditPerson(int id)
+        {
+            //You don't need the joins since you have navigation properies!
+            var personCompany = _context.PersonCompany.FirstOrDefault(n => n.PersonId == id);
+            var addresses = _context.Address.ToList();
+            EditPersonViewModel model;
+
+            List<SelectListItem> sliAddresses = new List<SelectListItem>();
+
+            foreach (Address address in addresses)
+            {
+                var text = "";
+                if (address.ApartmentNumber != null)
+                {
+                    text = address.City + " ul. " + address.Street + " " + address.BuildingNumber + " / " + address.ApartmentNumber;
+                }
+                else
+                {
+                    text = address.City + " ul. " + address.Street + " " + address.BuildingNumber;
+                }
+                sliAddresses.Add(new SelectListItem { Value = address.AddressId.ToString(), Text = text });
+            }
+
+
+            if (personCompany == default(PersonCompany))
+            {
+                model = new EditPersonViewModel
+                {
+                    Addresses = sliAddresses
+                };
+            }
+            else
+            {
+                model = new EditPersonViewModel
+                {
+                    PersonId = personCompany.PersonId,
+                    Name = personCompany.Name,
+                    SecondName = personCompany.SecondName,
+                    Surname = personCompany.Surname,
+                    Pesel = personCompany.Pesel,
+                    CompanyName = personCompany.CompanyName,
+                    NIP = personCompany.NIP,
+                    PhoneNumber = personCompany.PhoneNumber,
+                    Email = personCompany.Email,
+                    IsPerson = personCompany.IsPerson,
+                    AddressId = personCompany.AddressId,
+                    Address = personCompany.Address,
+                    Addresses = sliAddresses
+                };
+            }
+            //if (!model.Addresses.Any())
+            //{
+            //    model.Addresses.Add(new Address());
+            //}
+            //Returns the query to the view
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPerson(EditPersonViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //Query the database for the row to be updated. 
+                var personCompany = _context.PersonCompany.FirstOrDefault(n => n.PersonId == model.PersonId);
+                if (personCompany != default(PersonCompany))
+                {
+                    personCompany.Name = model.Name;
+                    personCompany.SecondName = model.SecondName;
+                    personCompany.Surname = model.Surname;
+                    personCompany.Pesel = model.Pesel;
+                    personCompany.CompanyName = model.CompanyName;
+                    personCompany.NIP = model.NIP;
+                    personCompany.PhoneNumber = model.PhoneNumber;
+                    personCompany.Email = model.Email;
+                    personCompany.IsPerson = model.IsPerson;
+                    personCompany.AddressId = model.AddressId;
+                    personCompany.Address = model.Address;
+
+                    _context.SaveChangesAsync();
+
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+
+
+
+        //-----------------------------------------------
+
+        public AddPersonViewModel Model()
+        {
+            var people = _context.PersonCompany.ToList();
+            var addresses = _context.Address.ToList();
+
+            List<SelectListItem> sliPeople = new List<SelectListItem>();
+            List<SelectListItem> sliAddresses = new List<SelectListItem>();
+
+
+            foreach (PersonCompany person in people)
+            {
+                if (person.IsPerson)
+                {
+                    sliPeople.Add(new SelectListItem { Value = person.PersonId.ToString(), Text = person.Name + " " + person.Surname });
+                }
+                else
+                {
+                    sliPeople.Add(new SelectListItem { Value = person.PersonId.ToString(), Text = person.CompanyName });
+                }
+
+            }
+
+            foreach (Address address in addresses)
+            {
+                var text = "";
+                if (address.ApartmentNumber != null)
+                {
+                    text = address.City + " ul. " + address.Street + " " + address.BuildingNumber + " / " + address.ApartmentNumber;
+                }
+                else
+                {
+                    text = address.City + " ul. " + address.Street + " " + address.BuildingNumber;
+                }
+                sliAddresses.Add(new SelectListItem { Value = address.AddressId.ToString(), Text = text });
+            }
+
+
+            AddPersonViewModel vm = new AddPersonViewModel()
+            {
+                Addresses = sliAddresses
+            };
+
+            return vm;
         }
     }
 }

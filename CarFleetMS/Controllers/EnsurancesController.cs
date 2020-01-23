@@ -58,7 +58,7 @@ namespace CarFleetMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EnsuranceId,EnsuranceNumber,NameOfTheCompany,StartDate,EndDate,Amount,VehicleId,PersonCompanyId")] Ensurance ensurance)
+        public async Task<IActionResult> Create([Bind("EnsuranceId,EnsuranceNumber,NameOfTheCompany,StartDate,EndDate,OCAmount,ACAmount,VehicleId,PersonCompanyId")] Ensurance ensurance)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace CarFleetMS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EnsuranceId,EnsuranceNumber,NameOfTheCompany,StartDate,EndDate,Amount,VehicleId,PersonCompanyId")] Ensurance ensurance)
+        public async Task<IActionResult> Edit(int id, [Bind("EnsuranceId,EnsuranceNumber,NameOfTheCompany,StartDate,EndDate,OCAmount,ACAmount,VehicleId,PersonCompanyId")] Ensurance ensurance)
         {
             if (id != ensurance.EnsuranceId)
             {

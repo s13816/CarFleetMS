@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarFleetMS.Models;
+using CarFleetMS.Data.ViewModel;
 
 namespace CarFleetMS.Controllers
 {
@@ -19,10 +20,21 @@ namespace CarFleetMS.Controllers
         }
 
         // GET: VehicleDrivers
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var carFleetMSContext = _context.VehicleDriver.Include(v => v.Driver).Include(v => v.Vehicle);
-            return View(await carFleetMSContext.ToListAsync());
+
+            DriverViewModel driverViewModel = new DriverViewModel
+            {
+                VehicleDrivers = _context.VehicleDriver,
+                Drivers = _context.Driver,
+                People = _context.PersonCompany,
+                Vehicles = _context.Vehicle,
+                Brands = _context.Brand,
+                Models = _context.Model
+            };
+
+            return View(driverViewModel);
         }
 
         // GET: VehicleDrivers/Details/5
@@ -33,7 +45,7 @@ namespace CarFleetMS.Controllers
                 return NotFound();
             }
 
-            var vehicleDriver = await _context.VehicleDriver
+            VehicleDriver vehicleDriver = await _context.VehicleDriver
                 .Include(v => v.Driver)
                 .Include(v => v.Vehicle)
                 .FirstOrDefaultAsync(m => m.VehicleDriverId == id);

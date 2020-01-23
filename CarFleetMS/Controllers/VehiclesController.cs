@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CarFleetMS.Models;
 using CarFleetMS.Data.ViewModel;
 
+
 namespace CarFleetMS.Controllers
 {
     public class VehiclesController : Controller
@@ -23,7 +24,19 @@ namespace CarFleetMS.Controllers
         public async Task<IActionResult> Index()
         {
             var carFleetMSContext = _context.Vehicle.Include(v => v.FuelType).Include(v => v.Holder).Include(v => v.Model).Include(v => v.Owner).Include(v => v.VehicleCategory).Include(v => v.VehicleKind).Include(v => v.VehicleType);
-            return View(await carFleetMSContext.ToListAsync());
+
+            VehicleViewModel vehicleViewModel = new VehicleViewModel
+            {
+                Vehicles = _context.Vehicle,
+                Brands = _context.Brand,
+                Models = _context.Model,
+                Ensurances = _context.Ensurance,
+                TechnicalExaminations = _context.TechnicalExamination
+            };
+
+
+            //return View(await carFleetMSContext.ToListAsync());
+            return View(vehicleViewModel);
         }
 
         // GET: Vehicles/Details/5
@@ -51,72 +64,62 @@ namespace CarFleetMS.Controllers
             return View(vehicle);
         }
 
-        // GET: Vehicles/Create
-        public IActionResult Create()
-        {
-            ViewData["FuelTypeId"] = new SelectList(_context.FuelType, "FuelTypeId", "FuelTypeId");
-            ViewData["HolderId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId");
-            ViewData["ModelId"] = new SelectList(_context.Model, "ModelId", "Name");
-            ViewData["OwnerId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId");
-            ViewData["VehicleCategoryId"] = new SelectList(_context.VehicleCategory, "VehicleCategoryId", "VehicleCategoryId");
-            ViewData["VehicleKindId"] = new SelectList(_context.VehicleKind, "VehicleKindId", "VehicleKindId");
-            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleType, "VehicleTypeId", "VehicleTypeId");
-            return View();
-        }
-
-        // POST: Vehicles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VehicleId,RegistrationNumber,DateOfFirstRegistration,Vin,MaxVehicleMass,PermissibleGrossVehicleWeight,PermissibleTotalWeightOfTheVehicleCombination,VehicleMass,RegistrationEndDate,RegistrationReleaseDate,VehicleTypeApprovalCertificateNumber,AxlesNumber,MaxTrailerWeightWithBrake,MaxTrailerWeightWithoutBrake,EngineCapacity,MaxNetPowerOfTheEngine,PowerToWeightRatio,SeatsNumber,StandingPositionsNumber,Purpose,YearOfProduction,MaxCapacity,MaxAxleLoad,CardNumber,OwnerId,HolderId,ModelId,VehicleTypeId,VehicleCategoryId,FuelTypeId,VehicleKindId")] Vehicle vehicle)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(vehicle);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FuelTypeId"] = new SelectList(_context.FuelType, "FuelTypeId", "FuelTypeId", vehicle.FuelTypeId);
-            ViewData["HolderId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId", vehicle.HolderId);
-            ViewData["ModelId"] = new SelectList(_context.Model, "ModelId", "Name", vehicle.ModelId);
-            ViewData["OwnerId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId", vehicle.OwnerId);
-            ViewData["VehicleCategoryId"] = new SelectList(_context.VehicleCategory, "VehicleCategoryId", "VehicleCategoryId", vehicle.VehicleCategoryId);
-            ViewData["VehicleKindId"] = new SelectList(_context.VehicleKind, "VehicleKindId", "VehicleKindId", vehicle.VehicleKindId);
-            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleType, "VehicleTypeId", "VehicleTypeId", vehicle.VehicleTypeId);
-            return View(vehicle);
-        }
-
-        // GET: Vehicles/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> DetailsVehicle(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var vehicle = await _context.Vehicle.FindAsync(id);
+            var vehicle = await _context.Vehicle
+                .Include(v => v.FuelType)
+                .Include(v => v.Holder)
+                .Include(v => v.Model)
+                .Include(v => v.Owner)
+                .Include(v => v.VehicleCategory)
+                .Include(v => v.VehicleKind)
+                .Include(v => v.VehicleType)
+                .FirstOrDefaultAsync(m => m.VehicleId == id);
+
+            VehicleViewModel vehicleViewModel = new VehicleViewModel
+            {
+                Vehicles = _context.Vehicle,
+                Brands = _context.Brand,
+                Models = _context.Model,
+                TechnicalExaminations = _context.TechnicalExamination
+            };
+
+            AddVehicleViewModel vm = Model();
+
+            //vm.Vehicle.VehicleId(id)
+
             if (vehicle == null)
             {
                 return NotFound();
             }
-            ViewData["FuelTypeId"] = new SelectList(_context.FuelType, "FuelTypeId", "FuelTypeId", vehicle.FuelTypeId);
-            ViewData["HolderId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId", vehicle.HolderId);
-            ViewData["ModelId"] = new SelectList(_context.Model, "ModelId", "Name", vehicle.ModelId);
-            ViewData["OwnerId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId", vehicle.OwnerId);
-            ViewData["VehicleCategoryId"] = new SelectList(_context.VehicleCategory, "VehicleCategoryId", "VehicleCategoryId", vehicle.VehicleCategoryId);
-            ViewData["VehicleKindId"] = new SelectList(_context.VehicleKind, "VehicleKindId", "VehicleKindId", vehicle.VehicleKindId);
-            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleType, "VehicleTypeId", "VehicleTypeId", vehicle.VehicleTypeId);
+
             return View(vehicle);
         }
 
-        // POST: Vehicles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //----------------------------------------------------------
+
+        public async Task<IActionResult> EditVehicle(int? id)
+        {
+            var vehicle = _context.Vehicle.FirstOrDefault(v => v.VehicleId == id);
+
+            AddVehicleViewModel vm = Model();
+            vm.Vehicle = vehicle;
+
+           
+
+            return View(vm);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VehicleId,RegistrationNumber,DateOfFirstRegistration,Vin,MaxVehicleMass,PermissibleGrossVehicleWeight,PermissibleTotalWeightOfTheVehicleCombination,VehicleMass,RegistrationEndDate,RegistrationReleaseDate,VehicleTypeApprovalCertificateNumber,AxlesNumber,MaxTrailerWeightWithBrake,MaxTrailerWeightWithoutBrake,EngineCapacity,MaxNetPowerOfTheEngine,PowerToWeightRatio,SeatsNumber,StandingPositionsNumber,Purpose,YearOfProduction,MaxCapacity,MaxAxleLoad,CardNumber,OwnerId,HolderId,ModelId,VehicleTypeId,VehicleCategoryId,FuelTypeId,VehicleKindId")] Vehicle vehicle)
+        public async Task<IActionResult> EditVehicle(int id, [Bind("VehicleId,RegistrationNumber,DateOfFirstRegistration,Vin,MaxVehicleMass,PermissibleGrossVehicleWeight,PermissibleTotalWeightOfTheVehicleCombination,VehicleMass,RegistrationEndDate,RegistrationReleaseDate,VehicleTypeApprovalCertificateNumber,AxlesNumber,MaxTrailerWeightWithBrake,MaxTrailerWeightWithoutBrake,EngineCapacity,MaxNetPowerOfTheEngine,PowerToWeightRatio,SeatsNumber,StandingPositionsNumber,Purpose,YearOfProduction,MaxCapacity,MaxAxleLoad,CardNumber,OwnerId,HolderId,ModelId,VehicleTypeId,VehicleCategoryId,FuelTypeId,VehicleKindId")] Vehicle vehicle)
         {
+
             if (id != vehicle.VehicleId)
             {
                 return NotFound();
@@ -142,14 +145,7 @@ namespace CarFleetMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FuelTypeId"] = new SelectList(_context.FuelType, "FuelTypeId", "FuelTypeId", vehicle.FuelTypeId);
-            ViewData["HolderId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId", vehicle.HolderId);
-            ViewData["ModelId"] = new SelectList(_context.Model, "ModelId", "Name", vehicle.ModelId);
-            ViewData["OwnerId"] = new SelectList(_context.PersonCompany, "PersonId", "PersonId", vehicle.OwnerId);
-            ViewData["VehicleCategoryId"] = new SelectList(_context.VehicleCategory, "VehicleCategoryId", "VehicleCategoryId", vehicle.VehicleCategoryId);
-            ViewData["VehicleKindId"] = new SelectList(_context.VehicleKind, "VehicleKindId", "VehicleKindId", vehicle.VehicleKindId);
-            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleType, "VehicleTypeId", "VehicleTypeId", vehicle.VehicleTypeId);
-            return View(vehicle);
+            return View(Model());
         }
 
         // GET: Vehicles/Delete/5
@@ -193,7 +189,14 @@ namespace CarFleetMS.Controllers
             return _context.Vehicle.Any(e => e.VehicleId == id);
         }
 
+        //--------------------------------------------------------------
+
         public IActionResult AddVehicle()
+        {
+            return View(Model());
+        }
+
+        public AddVehicleViewModel Model()
         {
             var people = _context.PersonCompany.ToList();
             var brands = _context.Brand.ToList();
@@ -203,8 +206,6 @@ namespace CarFleetMS.Controllers
             var fuelTypes = _context.FuelType.ToList();
             var vehicleKinds = _context.VehicleKind.ToList();
 
-            ViewBag.brands = _context.Brand.ToList(); ;
-            ViewBag.models = _context.Model.ToList();
             List<SelectListItem> sliPeople = new List<SelectListItem>();
             List<SelectListItem> sliBrands = new List<SelectListItem>();
             List<SelectListItem> sliVehicleTypes = new List<SelectListItem>();
@@ -268,31 +269,26 @@ namespace CarFleetMS.Controllers
                 VehicleKinds = sliVehicleKinds
             };
 
-            return View(vm);
+            return vm;
         }
 
         [HttpPost]
-        public IActionResult AddVehicle(Vehicle vehicle)
+        public IActionResult AddVehicle([Bind("VehicleId,RegistrationNumber,DateOfFirstRegistration,Vin,MaxVehicleMass,PermissibleGrossVehicleWeight,PermissibleTotalWeightOfTheVehicleCombination,VehicleMass,RegistrationEndDate,RegistrationReleaseDate,VehicleTypeApprovalCertificateNumber,AxlesNumber,MaxTrailerWeightWithBrake,MaxTrailerWeightWithoutBrake,EngineCapacity,MaxNetPowerOfTheEngine,PowerToWeightRatio,SeatsNumber,StandingPositionsNumber,Purpose,YearOfProduction,MaxCapacity,MaxAxleLoad,CardNumber,OwnerId,HolderId,ModelId,VehicleTypeId,VehicleCategoryId,FuelTypeId,VehicleKindId")] Vehicle vehicle)
         {
-            _context.Vehicle.Add(vehicle);
-            _context.SaveChanges();
+            _context.Add(vehicle);
+            _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
         public IActionResult FindModels(int id)
         {
-
-            //var list = _context.Model.Where(m => m.BrandId == id).ToList();
-            var lista = _context.Brand.ToList();
             var list = _context.Model.Where(model => model.BrandId == id).Select(model => new
             {
                 id = model.ModelId,
                 name = model.Name
             }).ToList();
 
-
             return new JsonResult(list);
-            //return View(_context.Vehicle.ToList());
         }
     }
 }

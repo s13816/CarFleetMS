@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarFleetMS.Models.VehicleDriver>
+﻿@model CarFleetMS.Data.ViewModel.DriverViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,29 +13,71 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Driver)
+                Kierowca
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vehicle)
+                Pojazd
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Driver.DriverId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.RegistrationNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VehicleDriverId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VehicleDriverId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VehicleDriverId">Delete</a>
-            </td>
-        </tr>
-}
+        @for (var i = 0; i < Model.VehicleDrivers.Count(); i++)
+        {
+            <tr>
+                @for (var j = 0; j < Model.Drivers.Count(); j++)
+                {
+                    if (Model.VehicleDrivers.ElementAt(i).DriverId.Equals(Model.Drivers.ElementAt(j).DriverId))
+                    {
+                        for (var k = 0; k < Model.People.Count(); k++)
+                        {
+                            if (Model.Drivers.ElementAt(j).PersonCompanyId.Equals(Model.People.ElementAt(k).PersonId))
+                            {
+                                if (@Model.People.ElementAt(k).IsPerson)
+                                {
+                                    <td>@Model.People.ElementAt(k).Name @Model.People.ElementAt(k).Surname </td>
+                                }
+                                else{
+                            <td>@Model.People.ElementAt(k).CompanyName</td>
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+                @for (var j = 0; j < Model.Vehicles.Count(); j++)
+                {
+                    if (Model.VehicleDrivers.ElementAt(i).VehicleId.Equals(Model.Vehicles.ElementAt(j).VehicleId))
+                    {
+                        for (var k = 0; k < Model.Models.Count(); k++)
+                        {
+                            if (Model.Models.ElementAt(k).ModelId.Equals(Model.Vehicles.ElementAt(j).ModelId))
+                            {
+                                for (var l = 0; l < Model.Brands.Count(); l++)
+                                {
+                                    if (Model.Brands.ElementAt(l).BrandId.Equals(Model.Models.ElementAt(k).BrandId))
+                                    {
+                                        <td>@Model.Brands.ElementAt(l).Name @Model.Models.ElementAt(k).Name - @Model.Vehicles.ElementAt(j).RegistrationNumber </td>
+                                    }
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.VehicleDrivers.ElementAt(i).VehicleDriverId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Model.VehicleDrivers.ElementAt(i).VehicleDriverId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.VehicleDrivers.ElementAt(i).VehicleDriverId">Delete</a>
+                </td>
+            </tr>
+        }
+
+
+
     </tbody>
 </table>
+

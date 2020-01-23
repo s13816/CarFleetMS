@@ -14,6 +14,7 @@ namespace CarFleetMS.Models
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VehicleTypeId { get; set; }
+        public string Name { get; set; }
         public string Variant { get; set; }
         public string Version { get; set; }
 

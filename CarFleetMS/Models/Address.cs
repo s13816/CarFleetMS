@@ -20,7 +20,10 @@ namespace CarFleetMS.Models
         public string PostalCode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        [ForeignKey("Institution")]
+        public int? InstitutionId { get; set; }
 
         public ICollection<PersonCompany> PersonCompany { get; set; }
+        public Institution Institution { get; set; }
     }
 }

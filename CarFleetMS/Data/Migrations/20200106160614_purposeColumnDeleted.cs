@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarFleetMS.Data.Migrations
 {
-    public partial class purposeColumnDeleted : Migration
+    public partial class PurposeColumnDeleted : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

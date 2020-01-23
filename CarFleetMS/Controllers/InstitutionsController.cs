@@ -9,22 +9,23 @@ using CarFleetMS.Models;
 
 namespace CarFleetMS.Controllers
 {
-    public class VehicleTypesController : Controller
+    public class InstitutionsController : Controller
     {
         private readonly CarFleetMSContext _context;
 
-        public VehicleTypesController(CarFleetMSContext context)
+        public InstitutionsController(CarFleetMSContext context)
         {
             _context = context;
         }
 
-        // GET: VehicleTypes
+        // GET: Institutions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.VehicleType.ToListAsync());
+            var carFleetMSContext = _context.Institution.Include(i => i.Address);
+            return View(await carFleetMSContext.ToListAsync());
         }
 
-        // GET: VehicleTypes/Details/5
+        // GET: Institutions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,42 @@ namespace CarFleetMS.Controllers
                 return NotFound();
             }
 
-            var vehicleType = await _context.VehicleType
-                .FirstOrDefaultAsync(m => m.VehicleTypeId == id);
-            if (vehicleType == null)
+            var institution = await _context.Institution
+                .Include(i => i.Address)
+                .FirstOrDefaultAsync(m => m.InstitutionId == id);
+            if (institution == null)
             {
                 return NotFound();
             }
 
-            return View(vehicleType);
+            return View(institution);
         }
 
-        // GET: VehicleTypes/Create
+        // GET: Institutions/Create
         public IActionResult Create()
         {
+            ViewData["AddressId"] = new SelectList(_context.Address, "AddressId", "AddressId");
             return View();
         }
 
-        // POST: VehicleTypes/Create
+        // POST: Institutions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VehicleTypeId,Name,Variant,Version")] VehicleType vehicleType)
+        public async Task<IActionResult> Create([Bind("InstitutionId,Name,AddressId")] Institution institution)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vehicleType);
+                _context.Add(institution);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehicleType);
+            ViewData["AddressId"] = new SelectList(_context.Address, "AddressId", "AddressId", institution.AddressId);
+            return View(institution);
         }
 
-        // GET: VehicleTypes/Edit/5
+        // GET: Institutions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +76,23 @@ namespace CarFleetMS.Controllers
                 return NotFound();
             }
 
-            var vehicleType = await _context.VehicleType.FindAsync(id);
-            if (vehicleType == null)
+            var institution = await _context.Institution.FindAsync(id);
+            if (institution == null)
             {
                 return NotFound();
             }
-            return View(vehicleType);
+            ViewData["AddressId"] = new SelectList(_context.Address, "AddressId", "AddressId", institution.AddressId);
+            return View(institution);
         }
 
-        // POST: VehicleTypes/Edit/5
+        // POST: Institutions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VehicleTypeId,Name,Variant,Version")] VehicleType vehicleType)
+        public async Task<IActionResult> Edit(int id, [Bind("InstitutionId,Name,AddressId")] Institution institution)
         {
-            if (id != vehicleType.VehicleTypeId)
+            if (id != institution.InstitutionId)
             {
                 return NotFound();
             }
@@ -96,12 +101,12 @@ namespace CarFleetMS.Controllers
             {
                 try
                 {
-                    _context.Update(vehicleType);
+                    _context.Update(institution);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VehicleTypeExists(vehicleType.VehicleTypeId))
+                    if (!InstitutionExists(institution.InstitutionId))
                     {
                         return NotFound();
                     }
@@ -112,10 +117,11 @@ namespace CarFleetMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehicleType);
+            ViewData["AddressId"] = new SelectList(_context.Address, "AddressId", "AddressId", institution.AddressId);
+            return View(institution);
         }
 
-        // GET: VehicleTypes/Delete/5
+        // GET: Institutions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +129,31 @@ namespace CarFleetMS.Controllers
                 return NotFound();
             }
 
-            var vehicleType = await _context.VehicleType
-                .FirstOrDefaultAsync(m => m.VehicleTypeId == id);
-            if (vehicleType == null)
+            var institution = await _context.Institution
+                .Include(i => i.Address)
+                .FirstOrDefaultAsync(m => m.InstitutionId == id);
+            if (institution == null)
             {
                 return NotFound();
             }
 
-            return View(vehicleType);
+            return View(institution);
         }
 
-        // POST: VehicleTypes/Delete/5
+        // POST: Institutions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var vehicleType = await _context.VehicleType.FindAsync(id);
-            _context.VehicleType.Remove(vehicleType);
+            var institution = await _context.Institution.FindAsync(id);
+            _context.Institution.Remove(institution);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VehicleTypeExists(int id)
+        private bool InstitutionExists(int id)
         {
-            return _context.VehicleType.Any(e => e.VehicleTypeId == id);
+            return _context.Institution.Any(e => e.InstitutionId == id);
         }
     }
 }

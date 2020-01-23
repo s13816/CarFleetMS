@@ -13,7 +13,8 @@ namespace CarFleetMS.Models
         public string NameOfTheCompany { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public decimal Amount { get; set; }
+        public decimal OCAmount { get; set; }
+        public decimal ACAmount { get; set; }
         public int VehicleId { get; set; }
         public int PersonCompanyId { get; set; }
 

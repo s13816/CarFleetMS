@@ -33,7 +33,7 @@ namespace CarFleetMS.Models
         public virtual DbSet<VehicleDriver> VehicleDriver { get; set; }
         public virtual DbSet<VehicleType> VehicleType { get; set; }
         public virtual DbSet<FuelType> FuelType { get; set; } //--------------------------------------------
-        //public virtual DbSet<Purpose> Purpose { get; set; } //--------------------------------------------
+        public virtual DbSet<Institution> Institution { get; set; } //--------------------------------------------
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -47,6 +47,11 @@ namespace CarFleetMS.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Institution>(entity =>
+            {
+                entity.Property(e => e.InstitutionId);
+            });
 
             modelBuilder.Entity<Address>(entity =>
             {
@@ -77,7 +82,8 @@ namespace CarFleetMS.Models
             {
                 entity.Property(e => e.EnsuranceId);
 
-                entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.OCAmount).HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.ACAmount).HasColumnType("decimal(10, 2)");
 
                 entity.Property(e => e.EndDate).HasColumnType("date");
 

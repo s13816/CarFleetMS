@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CarFleetMS.Models.Vehicle>
+﻿@*@model IEnumerable<CarFleetMS.Models.Vehicle>*@
+@model CarFleetMS.Data.ViewModel.VehicleViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,198 +13,62 @@
 <table class="table">
     <thead>
         <tr>
+
             <th>
-                @Html.DisplayNameFor(model => model.RegistrationNumber)
+                Marka
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfFirstRegistration)
+                Model
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vin)
+                Numer rejestracyjny
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaxVehicleMass)
+                Ubezpieczenie ważne do
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PermissibleGrossVehicleWeight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PermissibleTotalWeightOfTheVehicleCombination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleMass)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegistrationEndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegistrationReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleTypeApprovalCertificateNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AxlesNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxTrailerWeightWithBrake)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxTrailerWeightWithoutBrake)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EngineCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxNetPowerOfTheEngine)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PowerToWeightRatio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SeatsNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StandingPositionsNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Purpose)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YearOfProduction)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxAxleLoad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CardNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleKind)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FuelType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Holder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Owner)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
-            </th>
-            <th></th>
+          
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfFirstRegistration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxVehicleMass)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PermissibleGrossVehicleWeight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PermissibleTotalWeightOfTheVehicleCombination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleMass)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleTypeApprovalCertificateNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AxlesNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxTrailerWeightWithBrake)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxTrailerWeightWithoutBrake)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EngineCapacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxNetPowerOfTheEngine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PowerToWeightRatio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SeatsNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StandingPositionsNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Purpose)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearOfProduction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxCapacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxAxleLoad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CardNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleKind.VehicleKindId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuelType.FuelTypeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Holder.PersonId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Owner.PersonId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleCategory.VehicleCategoryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleType.VehicleTypeId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VehicleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VehicleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VehicleId">Delete</a>
-            </td>
-        </tr>
-}
+        @for (var i = 0; i < Model.Vehicles.Count(); i++)
+        {
+            <tr>
+                @for (var j = 0; j < Model.Models.Count(); j++)
+                {
+                    if (Model.Models.ElementAt(j).ModelId.Equals(Model.Vehicles.ElementAt(i).ModelId))
+                    {
+                        for (var k = 0; k < Model.Brands.Count(); k++)
+                        {
+                            if (Model.Brands.ElementAt(k).BrandId.Equals(Model.Models.ElementAt(j).BrandId))
+                            {
+                                <td>@Model.Brands.ElementAt(k).Name</td>
+                            }
+                        }
+                        <td>@Model.Models.ElementAt(j).Name</td>
+                    }
+                }
+                <td>
+                    @Model.Vehicles.ElementAt(i).RegistrationNumber
+                </td>
+
+               
+
+                @for (var j = 0; j < Model.Ensurances.Count(); j++)
+                {
+                    if (Model.Ensurances.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
+                    {
+                        <td>@Model.Ensurances.ElementAt(j).EndDate</td>
+                    }
+
+                }
+
+                <td>
+                    <a asp-action="EditVehicle" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
