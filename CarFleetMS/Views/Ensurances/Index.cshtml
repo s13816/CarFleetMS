@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarFleetMS.Models.Ensurance>
+﻿@model CarFleetMS.Data.ViewModel.EnsuranceViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,65 +13,101 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.EnsuranceNumber)
+                Numer ubezpieczenia
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NameOfTheCompany)
+                Firma
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                Okres polisy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDate)
+                OC/AC
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OCAmount)
+                Osoba
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ACAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonCompany)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vehicle)
+                Pojazd
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @for (var i = 0; i < Model.Ensurances.Count(); i++)
+        {
         <tr>
+            <td>@Model.Ensurances.ElementAt(i).EnsuranceNumber</td>
+            <td>@Model.Ensurances.ElementAt(i).NameOfTheCompany</td>
+            <td>@Model.Ensurances.ElementAt(i).StartDate.ToString("dd/MM/yyyy") - @Model.Ensurances.ElementAt(i).EndDate.Date.ToString("dd/MM/yyyy")</td>
+
+            @if (@Model.Ensurances.ElementAt(i).OCAmount > 0)
+            {
+                if (@Model.Ensurances.ElementAt(i).ACAmount > 0)
+                {
+                    <td>Tak/Tak</td>
+                }
+                else
+                {
+                    <td>Tak/Nie</td>
+                }
+            }
+            else
+            {
+                if (@Model.Ensurances.ElementAt(i).ACAmount > 0)
+                {
+                    <td>Nie/Tak</td>
+                }
+                else
+                {
+                    <td>Nie/Nie</td>
+                }
+            }
+
+            @for (var k = 0; k < Model.People.Count(); k++)
+            {
+                if (Model.Ensurances.ElementAt(i).PersonCompanyId.Equals(Model.People.ElementAt(k).PersonId))
+                {
+                    if (@Model.People.ElementAt(k).IsPerson)
+                    {
+                        <td>@Model.People.ElementAt(k).Name @Model.People.ElementAt(k).Surname </td>
+                    }
+                    else
+                    {
+                        <td>@Model.People.ElementAt(k).CompanyName</td>
+                    }
+
+                }
+            }
+
+            @for (var j = 0; j < Model.Vehicles.Count(); j++)
+            {
+                if (Model.Ensurances.ElementAt(i).VehicleId.Equals(Model.Vehicles.ElementAt(j).VehicleId))
+                {
+                    for (var k = 0; k < Model.Models.Count(); k++)
+                    {
+                        if (Model.Models.ElementAt(k).ModelId.Equals(Model.Vehicles.ElementAt(j).ModelId))
+                        {
+                            for (var l = 0; l < Model.Brands.Count(); l++)
+                            {
+                                if (Model.Brands.ElementAt(l).BrandId.Equals(Model.Models.ElementAt(k).BrandId))
+                                {
+                                    <td>@Model.Brands.ElementAt(l).Name @Model.Models.ElementAt(k).Name - @Model.Vehicles.ElementAt(j).RegistrationNumber </td>
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
             <td>
-                @Html.DisplayFor(modelItem => item.EnsuranceNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameOfTheCompany)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OCAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ACAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonCompany.PersonId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.RegistrationNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EnsuranceId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EnsuranceId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EnsuranceId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

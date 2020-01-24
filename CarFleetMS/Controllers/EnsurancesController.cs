@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarFleetMS.Models;
+using CarFleetMS.Data.ViewModel;
 
 namespace CarFleetMS.Controllers
 {
@@ -22,7 +23,17 @@ namespace CarFleetMS.Controllers
         public async Task<IActionResult> Index()
         {
             var carFleetMSContext = _context.Ensurance.Include(e => e.PersonCompany).Include(e => e.Vehicle);
-            return View(await carFleetMSContext.ToListAsync());
+
+            EnsuranceViewModel ensuranceViewModel = new EnsuranceViewModel
+            {
+                Ensurances = _context.Ensurance,                
+                People = _context.PersonCompany,
+                Vehicles = _context.Vehicle,
+                Brands = _context.Brand,
+                Models = _context.Model
+            };
+
+            return View(ensuranceViewModel);
         }
 
         // GET: Ensurances/Details/5

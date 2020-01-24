@@ -9,7 +9,10 @@ namespace CarFleetMS.Data.ViewModel
     public class EnsuranceViewModel
     {
         public IEnumerable<Ensurance> Ensurances { get; set; }
-        public IEnumerable<Vehicle> Vehicles { get; set; }
         public IEnumerable<PersonCompany> People { get; set; }
+        public IEnumerable<Vehicle> Vehicles { get; set; }
+        public IEnumerable<Brand> Brands { get; set; }
+        public IEnumerable<Model> Models { get; set; }
+
     }
 }

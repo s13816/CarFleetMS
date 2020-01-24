@@ -57,7 +57,7 @@
                 {
                     if (Model.Ensurances.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
                     {
-                        <td>@Model.Ensurances.ElementAt(j).EndDate</td>
+                        <td>@Model.Ensurances.ElementAt(j).EndDate.ToString("dd/MM/yyyy")</td>
                     }
 
                 }
