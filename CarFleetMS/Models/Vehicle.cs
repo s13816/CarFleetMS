@@ -51,7 +51,9 @@ namespace CarFleetMS.Models
         public int VehicleCategoryId { get; set; }
         public int FuelTypeId { get; set; }
         public int VehicleKindId { get; set; }
+        //public int InstitutionId { get; set; }
 
+        //public Institution Institution { get; set; }
         public VehicleKind VehicleKind { get; set; }
         public FuelType FuelType { get; set; }
         public PersonCompany Holder { get; set; }

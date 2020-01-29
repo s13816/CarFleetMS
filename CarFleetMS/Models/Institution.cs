@@ -14,5 +14,6 @@ namespace CarFleetMS.Models
         public int AddressId { get; set; }
 
         public Address Address { get; set; }
+        //public ICollection<Vehicle> Vehicle { get; set; }
     }
 }

@@ -236,6 +236,7 @@ namespace CarFleetMS.Controllers
             var vehicleCategories = _context.VehicleCategory.ToList();
             var fuelTypes = _context.FuelType.ToList();
             var vehicleKinds = _context.VehicleKind.ToList();
+            var institutions = _context.Institution.ToList();
 
             List<SelectListItem> sliPeople = new List<SelectListItem>();
             List<SelectListItem> sliBrands = new List<SelectListItem>();
@@ -244,6 +245,7 @@ namespace CarFleetMS.Controllers
             List<SelectListItem> sliModels = new List<SelectListItem>();
             List<SelectListItem> sliFuelTypes = new List<SelectListItem>();
             List<SelectListItem> sliVehicleKinds = new List<SelectListItem>();
+            List<SelectListItem> sliInstitutions = new List<SelectListItem>();
 
 
             foreach (PersonCompany person in people)
@@ -289,6 +291,11 @@ namespace CarFleetMS.Controllers
                 sliVehicleKinds.Add(new SelectListItem { Value = vehicleKind.VehicleKindId.ToString(), Text = vehicleKind.Name });
             }
 
+            //foreach(Institution institution in institutions)
+            //{
+            //    sliInstitutions.Add(new SelectListItem { Value = institution.InstitutionId.ToString(), Text = institution.Name });
+            //}
+
             AddVehicleViewModel vm = new AddVehicleViewModel()
             {
                 People = sliPeople,
@@ -298,6 +305,7 @@ namespace CarFleetMS.Controllers
                 VehicleCategories = sliVehicleCategories,
                 FuelTypes = sliFuelTypes,
                 VehicleKinds = sliVehicleKinds
+                //Institutions = sliInstitutions
             };
 
             return vm;
