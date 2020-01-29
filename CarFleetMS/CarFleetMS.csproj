@@ -3,33 +3,23 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-CarFleetMS-F6BCC3D7-343A-47F7-9879-362B31BF84D7</UserSecretsId>
-    <StartupObject />
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models2\**" />
+    <Content Remove="Models2\**" />
+    <EmbeddedResource Remove="Models2\**" />
+    <None Remove="Models2\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Data\Migrations\20190710164139_Initial.cs" />
     <Compile Remove="Data\Migrations\20190710164139_Initial.Designer.cs" />
-    <Compile Remove="Data\Migrations\20190710170400_Initial.cs" />
-    <Compile Remove="Data\Migrations\20190710170400_Initial.Designer.cs" />
-    <Compile Remove="Data\Migrations\20191123153851_NewInitial.cs" />
-    <Compile Remove="Data\Migrations\20191123153851_NewInitial.Designer.cs" />
-    <Compile Remove="Data\Migrations\20191124183158_1m.cs" />
-    <Compile Remove="Data\Migrations\20191124183158_1m.Designer.cs" />
-    <Compile Remove="Data\Migrations\20191204204344_BrandIdIdentity.cs" />
-    <Compile Remove="Data\Migrations\20191204204344_BrandIdIdentity.Designer.cs" />
-    <Compile Remove="Data\Migrations\20200110202853_InstitutionTableAdded.cs" />
-    <Compile Remove="Data\Migrations\20200110202853_InstitutionTableAdded.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="jQuery" Version="3.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.1.2" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
   </ItemGroup>
 

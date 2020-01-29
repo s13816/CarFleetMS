@@ -4,12 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<br />
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -36,78 +32,80 @@
     <tbody>
         @for (var i = 0; i < Model.Ensurances.Count(); i++)
         {
-        <tr>
-            <td>@Model.Ensurances.ElementAt(i).EnsuranceNumber</td>
-            <td>@Model.Ensurances.ElementAt(i).NameOfTheCompany</td>
-            <td>@Model.Ensurances.ElementAt(i).StartDate.ToString("dd/MM/yyyy") - @Model.Ensurances.ElementAt(i).EndDate.Date.ToString("dd/MM/yyyy")</td>
+            <tr>
+                <td>@Model.Ensurances.ElementAt(i).EnsuranceNumber</td>
+                <td>@Model.Ensurances.ElementAt(i).NameOfTheCompany</td>
+                <td>@Model.Ensurances.ElementAt(i).StartDate.ToString("dd/MM/yyyy") - @Model.Ensurances.ElementAt(i).EndDate.Date.ToString("dd/MM/yyyy")</td>
 
-            @if (@Model.Ensurances.ElementAt(i).OCAmount > 0)
-            {
-                if (@Model.Ensurances.ElementAt(i).ACAmount > 0)
+                @if (@Model.Ensurances.ElementAt(i).OCAmount > 0)
                 {
-                    <td>Tak/Tak</td>
-                }
-                else
-                {
-                    <td>Tak/Nie</td>
-                }
-            }
-            else
-            {
-                if (@Model.Ensurances.ElementAt(i).ACAmount > 0)
-                {
-                    <td>Nie/Tak</td>
-                }
-                else
-                {
-                    <td>Nie/Nie</td>
-                }
-            }
-
-            @for (var k = 0; k < Model.People.Count(); k++)
-            {
-                if (Model.Ensurances.ElementAt(i).PersonCompanyId.Equals(Model.People.ElementAt(k).PersonId))
-                {
-                    if (@Model.People.ElementAt(k).IsPerson)
+                    if (@Model.Ensurances.ElementAt(i).ACAmount > 0)
                     {
-                        <td>@Model.People.ElementAt(k).Name @Model.People.ElementAt(k).Surname </td>
+                        <td>Tak/Tak</td>
                     }
                     else
                     {
-                        <td>@Model.People.ElementAt(k).CompanyName</td>
+                        <td>Tak/Nie</td>
                     }
-
                 }
-            }
-
-            @for (var j = 0; j < Model.Vehicles.Count(); j++)
-            {
-                if (Model.Ensurances.ElementAt(i).VehicleId.Equals(Model.Vehicles.ElementAt(j).VehicleId))
+                else
                 {
-                    for (var k = 0; k < Model.Models.Count(); k++)
+                    if (@Model.Ensurances.ElementAt(i).ACAmount > 0)
                     {
-                        if (Model.Models.ElementAt(k).ModelId.Equals(Model.Vehicles.ElementAt(j).ModelId))
-                        {
-                            for (var l = 0; l < Model.Brands.Count(); l++)
-                            {
-                                if (Model.Brands.ElementAt(l).BrandId.Equals(Model.Models.ElementAt(k).BrandId))
-                                {
-                                    <td>@Model.Brands.ElementAt(l).Name @Model.Models.ElementAt(k).Name - @Model.Vehicles.ElementAt(j).RegistrationNumber </td>
-                                }
-                            }
-
-                        }
+                        <td>Nie/Tak</td>
                     }
-
+                    else
+                    {
+                        <td>Nie/Nie</td>
+                    }
                 }
-            }
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Delete</a>
-            </td>
-        </tr>
+                @for (var k = 0; k < Model.People.Count(); k++)
+                {
+                    if (Model.Ensurances.ElementAt(i).PersonCompanyId.Equals(Model.People.ElementAt(k).PersonId))
+                    {
+                        if (@Model.People.ElementAt(k).IsPerson)
+                        {
+                            <td>@Model.People.ElementAt(k).Name @Model.People.ElementAt(k).Surname </td>
+                        }
+                        else
+                        {
+                            <td>@Model.People.ElementAt(k).CompanyName</td>
+                        }
+
+                    }
+                }
+
+                @for (var j = 0; j < Model.Vehicles.Count(); j++)
+                {
+                    if (Model.Ensurances.ElementAt(i).VehicleId.Equals(Model.Vehicles.ElementAt(j).VehicleId))
+                    {
+                        for (var k = 0; k < Model.Models.Count(); k++)
+                        {
+                            if (Model.Models.ElementAt(k).ModelId.Equals(Model.Vehicles.ElementAt(j).ModelId))
+                            {
+                                for (var l = 0; l < Model.Brands.Count(); l++)
+                                {
+                                    if (Model.Brands.ElementAt(l).BrandId.Equals(Model.Models.ElementAt(k).BrandId))
+                                    {
+                                        <td>@Model.Brands.ElementAt(l).Name @Model.Models.ElementAt(k).Name - @Model.Vehicles.ElementAt(j).RegistrationNumber </td>
+                                    }
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.Ensurances.ElementAt(i).EnsuranceId">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+<button type="button" class="btn btn-warning"> <a asp-action="Create">Dodaj ubezpieczenie</a></button>

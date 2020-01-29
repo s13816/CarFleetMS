@@ -25,14 +25,45 @@ namespace CarFleetMS.Controllers
         {
             var carFleetMSContext = _context.Vehicle.Include(v => v.FuelType).Include(v => v.Holder).Include(v => v.Model).Include(v => v.Owner).Include(v => v.VehicleCategory).Include(v => v.VehicleKind).Include(v => v.VehicleType);
 
+            List<Ensurance> ensuranceList = _context.Ensurance.ToList();
+            List<TechnicalExamination> techList = _context.TechnicalExamination.ToList();
+
+            List<Ensurance> ensFinal = _context.Ensurance.ToList();
+            List<TechnicalExamination> techFinal = _context.TechnicalExamination.ToList();
+
+
+            foreach (Ensurance ens1 in ensuranceList)
+            {
+                foreach (Ensurance ens2 in ensuranceList)
+                {
+                    if(ens1.VehicleId.Equals(ens2.VehicleId) && DateTime.Compare(ens1.EndDate, ens2.EndDate) > 0)
+                    {
+                        ensFinal.Remove(ens2);
+                    }
+                }
+            }
+
+            foreach(TechnicalExamination tech1 in techList)
+            {
+                foreach(TechnicalExamination tech2 in techList)
+                {
+                    if (tech1.VehicleId.Equals(tech2.VehicleId) && DateTime.Compare(tech1.Validity, tech2.Validity) > 0)
+                    {
+                        techFinal.Remove(tech2);
+                    }
+                }
+            }
+
             VehicleViewModel vehicleViewModel = new VehicleViewModel
             {
                 Vehicles = _context.Vehicle,
                 Brands = _context.Brand,
                 Models = _context.Model,
-                Ensurances = _context.Ensurance,
-                TechnicalExaminations = _context.TechnicalExamination
+                Ensurances = ensFinal,
+                TechnicalExaminations = techFinal
             };
+
+
 
 
             //return View(await carFleetMSContext.ToListAsync());
@@ -110,7 +141,7 @@ namespace CarFleetMS.Controllers
             AddVehicleViewModel vm = Model();
             vm.Vehicle = vehicle;
 
-           
+
 
             return View(vm);
         }

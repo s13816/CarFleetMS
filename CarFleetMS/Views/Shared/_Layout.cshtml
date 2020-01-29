@@ -5,67 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CarFleetMS</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    @*<environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>*@
+    @*<environment exclude="Development">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>*@
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+
+    <!--jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="/bootstrap/js/bootstrap-transition.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-lux.css" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+                     $(document).ready(function() {
+                  $('li.active').removeClass('active');
+                  $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+});
+
+    </script>
+
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CarFleetMS</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
-                    <li><a asp-area="" asp-controller="Vehicles" asp-action="Index">Pojazdy</a></li>
-                    <li><a asp-area="" asp-controller="VehicleDrivers" asp-action="Index">Kierowcy</a></li>
-                    <li><a asp-area="" asp-controller="Ensurances" asp-action="Index">Ubezpieczenia</a></li>
-                    <li><a asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a></li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand text-danger" asp-area="" asp-controller="Home" asp-action="Index">CarFleetMS</a>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Database<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-area="" asp-controller="PersonCompany" asp-action="Index">Osoby</a></li>
-                            <li><a asp-area="" asp-controller="Address" asp-action="Index">Adresy</a></li>
-                            <li><a asp-area="" asp-controller="Brand" asp-action="Index">Marki</a></li>
-                            <li><a asp-area="" asp-controller="Drivers" asp-action="Index">Kierowcy</a></li>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                            <li><a asp-area="" asp-controller="FuelTypes" asp-action="Index">Typy paliwa</a></li>
-                            <li><a asp-area="" asp-controller="Models" asp-action="Index">Modele</a></li>
-                            <li><a asp-area="" asp-controller="Repairs" asp-action="Index">Naprawy</a></li>
-                            <li><a asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a></li>
-                            <li><a asp-area="" asp-controller="VehicleAnnotations" asp-action="Index">Notatki</a></li>
-                            <li><a asp-area="" asp-controller="VehicleCategories" asp-action="Index">Kategorie pojazdów</a></li>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
 
-                            <li><a asp-area="" asp-controller="VehicleTypes" asp-action="Index">Typy pojazdów</a></li>
-                            <li><a asp-area="" asp-controller="VehicleKinds" asp-action="Index">Rodzaje pojazdów</a></li>
-                            <li><a asp-area="" asp-controller="Institutions" asp-action="Index">Organy wydające</a></li>
-                        </ul>
-                    </li>
+                @*<li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Strona Główna</a>
+                    </li>*@
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Vehicles" asp-action="Index">Pojazdy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="VehicleDrivers" asp-action="Index">Kierowcy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Ensurances" asp-action="Index">Ubezpieczenia</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a>
+                </li>
 
-                </ul>
-                <partial name="_LoginPartial" />
-            </div>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                        <a class="dropdown-item" asp-area="" asp-controller="PersonCompany" asp-action="Index">Osoby</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Address" asp-action="Index">Adresy</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Brand" asp-action="Index">Marki</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Drivers" asp-action="Index">Kierowcy</a>
+
+                        <a class="dropdown-item" asp-area="" asp-controller="FuelTypes" asp-action="Index">Typy paliwa</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Models" asp-action="Index">Modele</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Repairs" asp-action="Index">Naprawy</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="VehicleAnnotations" asp-action="Index">Notatki</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="VehicleCategories" asp-action="Index">Kategorie pojazdów</a>
+
+                        <a class="dropdown-item" asp-area="" asp-controller="VehicleTypes" asp-action="Index">Typy pojazdów</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="VehicleKinds" asp-action="Index">Rodzaje pojazdów</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Institutions" asp-action="Index">Organy wydające</a>
+
+
+                    </div>
+                </li>
+            </ul>
+            @*<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>*@
+            <partial name="_LoginPartial" />
         </div>
     </nav>
+
+    @*<nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CarFleetMS</a>
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Vehicles" asp-action="Index">Pojazdy</a></li>
+                        <li><a asp-area="" asp-controller="VehicleDrivers" asp-action="Index">Kierowcy</a></li>
+                        <li><a asp-area="" asp-controller="Ensurances" asp-action="Index">Ubezpieczenia</a></li>
+                        <li><a asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Database<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="PersonCompany" asp-action="Index">Osoby</a></li>
+                                <li><a asp-area="" asp-controller="Address" asp-action="Index">Adresy</a></li>
+                                <li><a asp-area="" asp-controller="Brand" asp-action="Index">Marki</a></li>
+                                <li><a asp-area="" asp-controller="Drivers" asp-action="Index">Kierowcy</a></li>
+
+                                <li><a asp-area="" asp-controller="FuelTypes" asp-action="Index">Typy paliwa</a></li>
+                                <li><a asp-area="" asp-controller="Models" asp-action="Index">Modele</a></li>
+                                <li><a asp-area="" asp-controller="Repairs" asp-action="Index">Naprawy</a></li>
+                                <li><a asp-area="" asp-controller="TechnicalExaminations" asp-action="Index">Badania techniczne</a></li>
+                                <li><a asp-area="" asp-controller="VehicleAnnotations" asp-action="Index">Notatki</a></li>
+                                <li><a asp-area="" asp-controller="VehicleCategories" asp-action="Index">Kategorie pojazdów</a></li>
+
+                                <li><a asp-area="" asp-controller="VehicleTypes" asp-action="Index">Typy pojazdów</a></li>
+                                <li><a asp-area="" asp-controller="VehicleKinds" asp-action="Index">Rodzaje pojazdów</a></li>
+                                <li><a asp-area="" asp-controller="Institutions" asp-action="Index">Organy wydające</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>*@
 
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
+        
         @RenderBody()
         <hr />
         <footer>
@@ -85,15 +175,21 @@
                 crossorigin="anonymous"
                 integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
         </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-        </script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        @*<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+            </script>*@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)
 </body>
+
+
+
 </html>

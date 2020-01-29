@@ -5,15 +5,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<br />
 
-<p>
-    <a asp-action="AddVehicle">Create New</a>
-</p>
-<table class="table">
+<table class="table table-hover">
     <thead>
-        <tr>
-
+        <tr class="">
             <th>
                 Marka
             </th>
@@ -26,49 +22,162 @@
             <th>
                 Ubezpieczenie ważne do
             </th>
-          
+            <th>
+                Przegląd ważny do
+            </th>
+            <th>
+                Opcje
+            </th>
         </tr>
     </thead>
+
     <tbody>
         @for (var i = 0; i < Model.Vehicles.Count(); i++)
-        {
-            <tr>
-                @for (var j = 0; j < Model.Models.Count(); j++)
+        {            
+
+        <tr id='@Model.Vehicles.ElementAt(i).VehicleId"' class="dropdown">
+            @for (var j = 0; j < Model.Models.Count(); j++)
+            {
+                if (Model.Models.ElementAt(j).ModelId.Equals(Model.Vehicles.ElementAt(i).ModelId))
                 {
-                    if (Model.Models.ElementAt(j).ModelId.Equals(Model.Vehicles.ElementAt(i).ModelId))
+                    for (var k = 0; k < Model.Brands.Count(); k++)
                     {
-                        for (var k = 0; k < Model.Brands.Count(); k++)
+                        if (Model.Brands.ElementAt(k).BrandId.Equals(Model.Models.ElementAt(j).BrandId))
                         {
-                            if (Model.Brands.ElementAt(k).BrandId.Equals(Model.Models.ElementAt(j).BrandId))
-                            {
-                                <td>@Model.Brands.ElementAt(k).Name</td>
-                            }
+                            <td>@Model.Brands.ElementAt(k).Name</td>
                         }
-                        <td>@Model.Models.ElementAt(j).Name</td>
                     }
+                    <td>@Model.Models.ElementAt(j).Name</td>
                 }
-                <td>
-                    @Model.Vehicles.ElementAt(i).RegistrationNumber
-                </td>
+            }
+            <td>
+                @Model.Vehicles.ElementAt(i).RegistrationNumber
+            </td>
 
-               
+            @{
+                bool checkEns = false;
+                bool checkEx = false;
+            }
 
-                @for (var j = 0; j < Model.Ensurances.Count(); j++)
+            @for (var j = 0; j < Model.Ensurances.Count(); j++)
+            {
+                if (Model.Ensurances.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
                 {
-                    if (Model.Ensurances.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
+                    if ((DateTime.Now < Model.Ensurances.ElementAt(j).EndDate))
                     {
                         <td>@Model.Ensurances.ElementAt(j).EndDate.ToString("dd/MM/yyyy")</td>
                     }
+                    else
+                    {
+                        <td class="text-danger">Wygasło - @Model.Ensurances.ElementAt(j).EndDate.ToString("dd/MM/yyyy")</td>
+                    }
 
+                    checkEns = true;
                 }
 
-                <td>
-                    <a asp-action="EditVehicle" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Delete</a>
-                </td>
-            </tr>
+            }
+
+            @if (!checkEns)
+            {
+                <td class="text-danger">Brak ubezpieczenia</td>
+            }
+
+
+
+            @for (var j = 0; j < Model.TechnicalExaminations.Count(); j++)
+            {
+                if (Model.TechnicalExaminations.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
+                {
+
+                    <td>@Model.TechnicalExaminations.ElementAt(j).Validity.ToString("dd/MM/yyyy")</td>
+                    checkEx = true;
+                }
+
+            }
+
+            @if (!checkEx)
+            {
+                <td class="text-danger">Brak Przeglądu</td>
+            }
+
+            <td>
+                <a asp-action="EditVehicle" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Delete</a>
+            </td>
+        </tr>
+            
         }
+
+
+        @*<ul class="menu">
+                <li class="menu-item" id="red">Red Item</li>
+                <li class="menu-item" id="gold">Gold Item</li>
+                <li class="menu-item" id="green">Green Item</li>
+            </ul>
+
+            <script>
+                let menu = null;
+                document.addEventListener('DOMContentLoaded', function () {
+                    //make sure the right click menu is hidden
+                    menu = document.querySelector('.menu');
+                    menu.classList.add('off');
+
+                    //add the right click listener to the box
+                    let box = document.getElementById('box');
+                    box.addEventListener('contextmenu', showmenu);
+
+                    //add a listener for leaving the menu and hiding it
+                    menu.addEventListener('mouseleave', hidemenu);
+
+                    //add the listeners for the menu items
+                    addMenuListeners();
+                });
+
+                function addMenuListeners() {
+                    document.getElementById('red').addEventListener('click', setColour);
+                    document.getElementById('gold').addEventListener('click', setColour);
+                    document.getElementById('green').addEventListener('click', setColour);
+                }
+
+                function setColour(ev) {
+                    hidemenu();
+                    let clr = ev.target.id;
+                    document.getElementById('box').style.backgroundColor = clr;
+                }
+
+                function showmenu(ev) {
+                    //stop the real right click menu
+                    ev.preventDefault();
+                    //show the custom menu
+                    console.log(ev.clientX, ev.clientY);
+                    menu.style.top = `${ev.clientY - 20}px`;
+                    menu.style.left = `${ev.clientX - 20}px`;
+                    menu.classList.remove('off');
+                }
+
+                function hidemenu(ev) {
+                    menu.classList.add('off');
+                    menu.style.top = '-200%';
+                    menu.style.left = '-200%';
+                }
+            </script>*@
     </tbody>
 </table>
+<button type="button" class="btn btn-warning"> <a asp-action="AddVehicle">Dodaj pojazd</a></button>
+
+
+@*<script>
+        if (document.addEventListener) {
+      document.addEventListener('contextmenu', function(e) {
+        alert("You've tried to open context menu"); //here you draw your own menu
+        e.preventDefault();
+      }, false);
+    } else {
+      document.attachEvent('oncontextmenu', function() {
+        alert("You've tried to open context menu");
+        window.event.returnValue = false;
+      });
+    }
+    </script>*@
 

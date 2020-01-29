@@ -1,44 +1,236 @@
-﻿@{
+﻿@model CarFleetMS.Data.ViewModel.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
+<br />
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-3">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Side Navigation Bar</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-</head>
-<body>
+            <h4 class="text-center">Szybkie akcje</h4>
+            <hr />
 
-    <div class="wrapper">
-        <div class="sidebar">
-            <h2>Sidebar</h2>
-            <ul>
-                <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
-                <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
-                <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
-                <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
-                <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
-                <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li>
+
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" asp-area="" asp-controller="Vehicles" asp-action="AddVehicle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        Dodaj pojazd <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="VehicleDrivers" asp-action="Create">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        Dodaj kierowcę
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Ensurances" asp-action="Create">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        Dodaj ubezpieczenie
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="TechnicalExaminations" asp-action="Create">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        Dodaj przegląd
+                    </a>
+                </li>
+
+
+
             </ul>
-            <div class="social_media">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
         </div>
-        <div class="main_content">
-            <div class="header">Welcome!! Have a nice day.</div>
-            <div class="info">
-                <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
-                <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
-                <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
-            </div>
+        <div class="col-9">
+
+
+            <h4>Kończące się ubezpieczenia</h4>
+            <hr />
+            <table class="table table-sm table-hover table-borderless ">
+                <thead>
+                    <tr class="">
+                        <th>
+                            Marka
+                        </th>
+                        <th>
+                            Model
+                        </th>
+                        <th>
+                            Nr rejestracyjny
+                        </th>
+                        <th>
+                            Ubezpieczenie ważne do
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody class="">
+                    @for (var i = 0; i < Model.Vehicles.Count(); i++)
+                    {
+
+                        bool ens = false;
+
+                        for (var j = 0; j < Model.Ensurances.Count(); j++)
+                        {
+                            if (Model.Ensurances.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
+                            {
+                                if ((DateTime.Now < Model.Ensurances.ElementAt(j).EndDate) && (DateTime.Now.AddDays(30) > Model.Ensurances.ElementAt(j).EndDate))
+                                {
+                                    ens = true;
+                                }
+
+                            }
+
+                        }
+                        if (ens)
+                        {
+                            <tr id='@Model.Vehicles.ElementAt(i).VehicleId"' class="dropdown">
+                                @for (var j = 0; j < Model.Models.Count(); j++)
+                                {
+                                    if (Model.Models.ElementAt(j).ModelId.Equals(Model.Vehicles.ElementAt(i).ModelId))
+                                    {
+                                        for (var k = 0; k < Model.Brands.Count(); k++)
+                                        {
+                                            if (Model.Brands.ElementAt(k).BrandId.Equals(Model.Models.ElementAt(j).BrandId))
+                                            {
+                                                <td>@Model.Brands.ElementAt(k).Name</td>
+                                            }
+                                        }
+                                        <td>@Model.Models.ElementAt(j).Name</td>
+                                    }
+                                }
+                                <td>
+                                    @Model.Vehicles.ElementAt(i).RegistrationNumber
+                                </td>
+
+                                @{
+                                    bool checkEns = false;
+                                    bool checkEx = false;
+                                }
+
+                                @for (var j = 0; j < Model.Ensurances.Count(); j++)
+                                {
+                                    if (Model.Ensurances.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
+                                    {
+                                        <td class="text-warning">@Model.Ensurances.ElementAt(j).EndDate.ToString("dd/MM/yyyy")</td>
+                                        checkEns = true;
+                                    }
+
+                                }
+
+                                @if (!checkEns)
+                                {
+                                    <td>Brak ubezpieczenia</td>
+                                }
+
+                                <td>
+                                    <a asp-action="EditVehicle" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <br />
+
+            <h4>Kończące się badania techniczne</h4>
+            <hr />
+            <table class="table table-sm table-hover table-borderless ">
+                <thead>
+                    <tr class="">
+                        <th>
+                            Marka
+                        </th>
+                        <th>
+                            Model
+                        </th>
+                        <th>
+                            Nr rejestracyjny
+                        </th>
+                        <th>
+                            Ubezpieczenie ważne do
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody class="">
+                    @for (var i = 0; i < Model.Vehicles.Count(); i++)
+                    {
+
+                        bool ens = false;
+
+                        for (var j = 0; j < Model.TechnicalExaminations.Count(); j++)
+                        {
+                            if (Model.TechnicalExaminations.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
+                            {
+                                if ((DateTime.Now < Model.TechnicalExaminations.ElementAt(j).Validity) && (DateTime.Now.AddDays(30) > Model.TechnicalExaminations.ElementAt(j).Validity))
+                                {
+                                    ens = true;
+                                }
+
+                            }
+
+                        }
+                        if (ens)
+                        {
+                            <tr id='@Model.Vehicles.ElementAt(i).VehicleId"' class="dropdown">
+                                @for (var j = 0; j < Model.Models.Count(); j++)
+                                {
+                                    if (Model.Models.ElementAt(j).ModelId.Equals(Model.Vehicles.ElementAt(i).ModelId))
+                                    {
+                                        for (var k = 0; k < Model.Brands.Count(); k++)
+                                        {
+                                            if (Model.Brands.ElementAt(k).BrandId.Equals(Model.Models.ElementAt(j).BrandId))
+                                            {
+                                                <td>@Model.Brands.ElementAt(k).Name</td>
+                                            }
+                                        }
+                                        <td>@Model.Models.ElementAt(j).Name</td>
+                                    }
+                                }
+                                <td>
+                                    @Model.Vehicles.ElementAt(i).RegistrationNumber
+                                </td>
+
+                                @{
+                                    bool checkEns = false;
+                                    bool checkEx = false;
+                                }
+
+                                @for (var j = 0; j < Model.TechnicalExaminations.Count(); j++)
+                                {
+                                    if (Model.TechnicalExaminations.ElementAt(j).VehicleId.Equals(Model.Vehicles.ElementAt(i).VehicleId))
+                                    {
+
+                                        <td class="text-warning">@Model.TechnicalExaminations.ElementAt(j).Validity.ToString("dd/MM/yyyy")</td>
+                                        checkEx = true;
+                                    }
+
+                                }
+
+                                @if (!checkEx)
+                                {
+                                    <td class="text-danger">Brak Przeglądu</td>
+                                }
+
+                                <td>
+                                    <a asp-action="EditVehicle" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@Model.Vehicles.ElementAt(i).VehicleId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+
+
+
+
+
         </div>
     </div>
-
-</body>
-</html>
+</div>
