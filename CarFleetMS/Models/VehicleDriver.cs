@@ -12,6 +12,7 @@ namespace CarFleetMS.Models
         public int VehicleId { get; set; }
         public int DriverId { get; set; }
 
+
         public Driver Driver { get; set; }
         public Vehicle Vehicle { get; set; }
     }

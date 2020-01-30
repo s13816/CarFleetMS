@@ -252,11 +252,11 @@ namespace CarFleetMS.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Vehicle_FuelType");
 
-                //entity.HasOne(d => d.Institution)
-                //    .WithMany(p => p.Vehicle)
-                //    .HasForeignKey(d => d.InstitutionId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("VehicleInstitution");
+                entity.HasOne(d => d.Institution)
+                    .WithMany(p => p.Vehicle)
+                    .HasForeignKey(d => d.InstitutionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("VehicleInstitution");
 
                 //entity.HasOne(d => d.Purpose) //------------------------------------------
                 //   .WithMany(p => p.Vehicle)
