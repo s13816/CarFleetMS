@@ -1,4 +1,4 @@
-﻿@model CarFleetMS.Models.VehicleDriver
+﻿@model CarFleetMS.Models.Rent
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,13 +6,13 @@
 
 <h2>Edit</h2>
 
-<h4>VehicleDriver</h4>
+<h4>Rent</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="VehicleDriverId" />
+            <input type="hidden" asp-for="RentId" />
             <div class="form-group">
                 <label asp-for="VehicleId" class="control-label"></label>
                 <select asp-for="VehicleId" class="form-control" asp-items="ViewBag.VehicleId"></select>

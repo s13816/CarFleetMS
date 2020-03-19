@@ -8,7 +8,7 @@ namespace CarFleetMS.Data.ViewModel
 {
     public class DriverViewModel
     {
-        public IEnumerable<VehicleDriver> VehicleDrivers { get; set; }
+        public IEnumerable<Rent> Rents { get; set; }
         public IEnumerable<Driver> Drivers { get; set; }
         public IEnumerable<PersonCompany> People { get; set; }
         public IEnumerable<Vehicle> Vehicles { get; set; }

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CarFleetMS.Data.Migrations
+namespace CarFleetMS.Migrations
 {
     [DbContext(typeof(CarFleetMSContext))]
-    [Migration("20200114144645_VechicleTypeNameAdded")]
-    partial class VechicleTypeNameAdded
+    [Migration("20200219200636_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,7 +84,7 @@ namespace CarFleetMS.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount")
+                    b.Property<decimal>("ACAmount")
                         .HasColumnType("decimal(10, 2)");
 
                     b.Property<DateTime>("EndDate")
@@ -97,6 +97,9 @@ namespace CarFleetMS.Data.Migrations
                     b.Property<string>("NameOfTheCompany")
                         .IsRequired()
                         .HasMaxLength(100);
+
+                    b.Property<decimal>("OCAmount")
+                        .HasColumnType("decimal(10, 2)");
 
                     b.Property<int>("PersonCompanyId");
 
@@ -217,6 +220,25 @@ namespace CarFleetMS.Data.Migrations
                     b.ToTable("PersonCompany");
                 });
 
+            modelBuilder.Entity("CarFleetMS.Models.Rent", b =>
+                {
+                    b.Property<int>("RentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DriverId");
+
+                    b.Property<int>("VehicleId");
+
+                    b.HasKey("RentId");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Rent");
+                });
+
             modelBuilder.Entity("CarFleetMS.Models.Repair", b =>
                 {
                     b.Property<int>("RepairId")
@@ -277,6 +299,8 @@ namespace CarFleetMS.Data.Migrations
                     b.Property<int>("FuelTypeId");
 
                     b.Property<int>("HolderId");
+
+                    b.Property<int>("InstitutionId");
 
                     b.Property<double>("MaxAxleLoad");
 
@@ -340,6 +364,8 @@ namespace CarFleetMS.Data.Migrations
 
                     b.HasIndex("HolderId");
 
+                    b.HasIndex("InstitutionId");
+
                     b.HasIndex("ModelId");
 
                     b.HasIndex("OwnerId");
@@ -386,25 +412,6 @@ namespace CarFleetMS.Data.Migrations
                     b.HasKey("VehicleCategoryId");
 
                     b.ToTable("VehicleCategory");
-                });
-
-            modelBuilder.Entity("CarFleetMS.Models.VehicleDriver", b =>
-                {
-                    b.Property<int>("VehicleDriverId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DriverId");
-
-                    b.Property<int>("VehicleId");
-
-                    b.HasKey("VehicleDriverId");
-
-                    b.HasIndex("DriverId");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("Vehicle_Driver");
                 });
 
             modelBuilder.Entity("CarFleetMS.Models.VehicleKind", b =>
@@ -662,6 +669,19 @@ namespace CarFleetMS.Data.Migrations
                         .HasConstraintName("Person_Address");
                 });
 
+            modelBuilder.Entity("CarFleetMS.Models.Rent", b =>
+                {
+                    b.HasOne("CarFleetMS.Models.Driver", "Driver")
+                        .WithMany("Rent")
+                        .HasForeignKey("DriverId")
+                        .HasConstraintName("Rent_Driver");
+
+                    b.HasOne("CarFleetMS.Models.Vehicle", "Vehicle")
+                        .WithMany("Rent")
+                        .HasForeignKey("VehicleId")
+                        .HasConstraintName("Rent_Vehicle");
+                });
+
             modelBuilder.Entity("CarFleetMS.Models.Repair", b =>
                 {
                     b.HasOne("CarFleetMS.Models.Vehicle", "Vehicle")
@@ -689,6 +709,11 @@ namespace CarFleetMS.Data.Migrations
                         .WithMany("VehicleHolder")
                         .HasForeignKey("HolderId")
                         .HasConstraintName("VehicleOwner");
+
+                    b.HasOne("CarFleetMS.Models.Institution", "Institution")
+                        .WithMany("Vehicle")
+                        .HasForeignKey("InstitutionId")
+                        .HasConstraintName("VehicleInstitution");
 
                     b.HasOne("CarFleetMS.Models.Model", "Model")
                         .WithMany("Vehicle")
@@ -722,19 +747,6 @@ namespace CarFleetMS.Data.Migrations
                         .WithMany("VehicleAnnotations")
                         .HasForeignKey("VehicleId")
                         .HasConstraintName("AdditionalVehicleInfo_Vehicle");
-                });
-
-            modelBuilder.Entity("CarFleetMS.Models.VehicleDriver", b =>
-                {
-                    b.HasOne("CarFleetMS.Models.Driver", "Driver")
-                        .WithMany("VehicleDriver")
-                        .HasForeignKey("DriverId")
-                        .HasConstraintName("Vehicle_Driver_Driver");
-
-                    b.HasOne("CarFleetMS.Models.Vehicle", "Vehicle")
-                        .WithMany("VehicleDriver")
-                        .HasForeignKey("VehicleId")
-                        .HasConstraintName("Vehicle_Driver_Vehicle");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

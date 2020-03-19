@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarFleetMS.Models;
 using CarFleetMS.Data.ViewModel;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarFleetMS.Controllers
 {
+    [Authorize(Roles = Roles.AdministratorRole)]
     public class VehiclesController : Controller
     {
         private readonly CarFleetMSContext _context;

@@ -30,7 +30,7 @@ namespace CarFleetMS.Models
         public virtual DbSet<Vehicle> Vehicle { get; set; }
         public virtual DbSet<VehicleAnnotations> VehicleAnnotations { get; set; }
         public virtual DbSet<VehicleCategory> VehicleCategory { get; set; }
-        public virtual DbSet<VehicleDriver> VehicleDriver { get; set; }
+        public virtual DbSet<Rent> Rent { get; set; }
         public virtual DbSet<VehicleType> VehicleType { get; set; }
         public virtual DbSet<FuelType> FuelType { get; set; } //--------------------------------------------
         public virtual DbSet<Institution> Institution { get; set; } //--------------------------------------------
@@ -40,9 +40,10 @@ namespace CarFleetMS.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CarFleetMS;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CarFleetMSV2;Trusted_Connection=True;");
             }
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -258,11 +259,6 @@ namespace CarFleetMS.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("VehicleInstitution");
 
-                //entity.HasOne(d => d.Purpose) //------------------------------------------
-                //   .WithMany(p => p.Vehicle)
-                //   .HasForeignKey(d => d.PurposeId)
-                //   .OnDelete(DeleteBehavior.ClientSetNull)
-                //   .HasConstraintName("Vehicle_Purpose");
             });
 
             modelBuilder.Entity<VehicleAnnotations>(entity =>
@@ -294,29 +290,33 @@ namespace CarFleetMS.Models
                 entity.Property(e => e.FuelTypeId);
             });
 
-            //modelBuilder.Entity<Purpose>(entity =>
-            //{
-            //    entity.Property(e => e.PurposeId);
-            //});
 
-            modelBuilder.Entity<VehicleDriver>(entity =>
+
+            modelBuilder.Entity<Rent>(entity =>
             {
-                entity.ToTable("Vehicle_Driver");
+                entity.ToTable("Rent");
 
-                entity.Property(e => e.VehicleDriverId);
+                entity.Property(e => e.RentId);
+
+                entity.Property(e => e.StartDate).IsRequired();
+
+                entity.Property(e => e.EndDate).IsRequired();
+
+                entity.Property(e => e.Description).HasMaxLength(1000);
 
                 entity.HasOne(d => d.Driver)
-                    .WithMany(p => p.VehicleDriver)
+                    .WithMany(p => p.Rent)
                     .HasForeignKey(d => d.DriverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Vehicle_Driver_Driver");
+                    .HasConstraintName("Rent_Driver");
 
                 entity.HasOne(d => d.Vehicle)
-                    .WithMany(p => p.VehicleDriver)
+                    .WithMany(p => p.Rent)
                     .HasForeignKey(d => d.VehicleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Vehicle_Driver_Vehicle");
+                    .HasConstraintName("Rent_Vehicle");
             });
+
 
             modelBuilder.Entity<VehicleType>(entity =>
             {

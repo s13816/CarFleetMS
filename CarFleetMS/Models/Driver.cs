@@ -9,7 +9,7 @@ namespace CarFleetMS.Models
     {
         public Driver()
         {
-            VehicleDriver = new HashSet<VehicleDriver>();
+            Rent = new HashSet<Rent>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,6 +17,6 @@ namespace CarFleetMS.Models
         public int PersonCompanyId { get; set; }
 
         public PersonCompany PersonCompany { get; set; }
-        public ICollection<VehicleDriver> VehicleDriver { get; set; }
+        public ICollection<Rent> Rent { get; set; }
     }
 }

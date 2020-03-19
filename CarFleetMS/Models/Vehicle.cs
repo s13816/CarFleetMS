@@ -14,7 +14,7 @@ namespace CarFleetMS.Models
             Repair = new HashSet<Repair>();
             TechnicalExamination = new HashSet<TechnicalExamination>();
             VehicleAnnotations = new HashSet<VehicleAnnotations>();
-            VehicleDriver = new HashSet<VehicleDriver>();
+            Rent = new HashSet<Rent>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -35,15 +35,15 @@ namespace CarFleetMS.Models
         public int MaxTrailerWeightWithoutBrake { get; set; }
         public double EngineCapacity { get; set; }
         public double MaxNetPowerOfTheEngine { get; set; }
-        //public string FuelType { get; set; }
         public int PowerToWeightRatio { get; set; }
         public int SeatsNumber { get; set; }
         public int? StandingPositionsNumber { get; set; }
-        public string Purpose { get; set; } //int b4
+        public string Purpose { get; set; }
         public int YearOfProduction { get; set; }
         public int MaxCapacity { get; set; }
         public double MaxAxleLoad { get; set; }
-        public string CardNumber { get; set; } //int b4
+        public string CardNumber { get; set; }
+        public int Mileage { get; set; }
         public int OwnerId { get; set; }
         public int HolderId { get; set; }
         public int ModelId { get; set; }
@@ -66,6 +66,6 @@ namespace CarFleetMS.Models
         public ICollection<Repair> Repair { get; set; }
         public ICollection<TechnicalExamination> TechnicalExamination { get; set; }
         public ICollection<VehicleAnnotations> VehicleAnnotations { get; set; }
-        public ICollection<VehicleDriver> VehicleDriver { get; set; }
+        public ICollection<Rent> Rent { get; set; }
     }
 }

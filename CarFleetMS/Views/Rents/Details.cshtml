@@ -1,14 +1,13 @@
-﻿@model CarFleetMS.Models.VehicleDriver
+﻿@model CarFleetMS.Models.Rent
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<h2>Delete</h2>
+<h2>Details</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>VehicleDriver</h4>
+    <h4>Rent</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -24,10 +23,8 @@
             @Html.DisplayFor(model => model.Vehicle.RegistrationNumber)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="VehicleDriverId" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RentId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>
